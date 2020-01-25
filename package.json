@@ -5,7 +5,11 @@
     "apps/*",
     "libs/*"
   ],
+  "scripts": {
+    "format": "prettier --write '**/*.{js,ts,html,jsx,scss,json}'"
+  },
   "devDependencies": {
-    "lerna": "^3.20.2"
+    "lerna": "^3.20.2",
+    "prettier": "^1.19.1"
   }
 }
