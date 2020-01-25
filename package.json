@@ -1,11 +1,15 @@
 {
   "name": "root",
   "private": true,
+  "repository": "git@github.com:modernweb-pl/vue-nest-monorepo.git",
+  "author": "ModernWeb <biuro@modernweb.pl>",
   "workspaces": [
     "apps/*",
     "libs/*"
   ],
   "scripts": {
+    "api": "yarn workspace @app/api",
+    "bootstrap": "lerna bootstrap",
     "format": "prettier --write '**/*.{js,ts,html,jsx,scss,json}'"
   },
   "devDependencies": {
