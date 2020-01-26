@@ -1148,9 +1148,9 @@
     tslib "1.10.0"
 
 "@nestjs/schematics@^6.7.0", "@nestjs/schematics@^6.8.2":
-  version "6.8.2"
-  resolved "https://registry.yarnpkg.com/@nestjs/schematics/-/schematics-6.8.2.tgz#0c4c6cc87dd28564bb52e6516deacad1d6ceb56c"
-  integrity sha512-NWfsDj8dBD9MjJtnusMpRTrXGwIaSYvOCzeV8iwLimQNfGEHQCRvmW/XVc95eLewCfA5Q2SkbbIE00Iea4dg5Q==
+  version "6.9.1"
+  resolved "https://registry.yarnpkg.com/@nestjs/schematics/-/schematics-6.9.1.tgz#113b39dd9a293af60cd2b9029c6ef11b1606e5cd"
+  integrity sha512-tblebZ2pMtaHKyyvWfFmOmzRTq2j8X1v782KjEZSBAY+4009GBcLE4HJW9BdXmaJ5NFqqo125+OcShfQi06r8Q==
   dependencies:
     "@angular-devkit/core" "7.3.8"
     "@angular-devkit/schematics" "7.3.8"
@@ -1223,9 +1223,9 @@
     universal-user-agent "^4.0.0"
 
 "@octokit/rest@^16.28.4":
-  version "16.38.2"
-  resolved "https://registry.yarnpkg.com/@octokit/rest/-/rest-16.38.2.tgz#f79b48aa9d525eaf41d77b90003fd2bfb55b0f89"
-  integrity sha512-dRizXyl9nz0+XEVFtT9myucqbYsuwqLa9YjsQJpLPVtdNx4IxbG8YeqSB7Ue5yiov2ubpLxwDl0rzKBz5alB4w==
+  version "16.38.3"
+  resolved "https://registry.yarnpkg.com/@octokit/rest/-/rest-16.38.3.tgz#d5d200f88962392f71e048e12833ea36f4e0d192"
+  integrity sha512-Ui5W4Gzv0YHe9P3KDZAuU/BkRrT88PCuuATfWBMBf4fux4nB8th8LlyVAVnHKba1s/q4umci+sNHzoFYFujPEg==
   dependencies:
     "@octokit/auth-token" "^2.4.0"
     "@octokit/request" "^5.2.0"
@@ -6699,7 +6699,7 @@ prelude-ls@~1.1.2:
   resolved "https://registry.yarnpkg.com/prelude-ls/-/prelude-ls-1.1.2.tgz#21932a549f5e52ffd9a827f570e04be62a97da54"
   integrity sha1-IZMqVJ9eUv/ZqCf1cOBL5iqX2lQ=
 
-prettier@^1.18.2, prettier@^1.19.1:
+prettier@^1.19.1:
   version "1.19.1"
   resolved "https://registry.yarnpkg.com/prettier/-/prettier-1.19.1.tgz#f7d7f5ff8a9cd872a7be4ca142095956a60797cb"
   integrity sha512-s7PoyDv/II1ObgQunCbB9PdLmUcBZcnWOcxDh7O0N/UwDEsHyqkW+Qh28jW+mVuCdx7gLB0BotYI1Y6uI9iyew==
