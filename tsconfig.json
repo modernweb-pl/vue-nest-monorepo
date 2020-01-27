@@ -1,5 +1,7 @@
 {
   "compileOnSave": false,
-  "compilerOptions": {},
+  "compilerOptions": {
+    "sourceMap": true
+  },
   "exclude": ["node_modules", "dist"]
 }
