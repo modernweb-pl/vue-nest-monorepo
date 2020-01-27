@@ -3,12 +3,18 @@
   "private": true,
   "repository": "git@github.com:modernweb-pl/vue-nest-monorepo.git",
   "author": "ModernWeb <biuro@modernweb.pl>",
-  "workspaces": [
-    "apps/*",
-    "libs/*"
-  ],
+  "workspaces": {
+    "packages": [
+      "apps/*",
+      "libs/*"
+    ],
+    "nohoist": [
+      "**/@vue/cli-service"
+    ]
+  },
   "scripts": {
     "api": "yarn workspace @app/api",
+    "web": "yarn workspace @app/web",
     "bootstrap": "lerna bootstrap",
     "format": "prettier --write '**/*.{js,ts,html,jsx,scss,json}'",
     "lint": "eslint --ext .js,.ts ."
