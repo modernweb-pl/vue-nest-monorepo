@@ -16,9 +16,8 @@
     "api": "yarn workspace @app/api",
     "web": "yarn workspace @app/web",
     "bootstrap": "lerna bootstrap",
-    "format": "prettier --write '**/*.{js,jsx,ts,tsx,vue,html,scss,json}'",
-    "lint": "eslint --ext .js,.jsx,.ts,.tsx,.vue .",
-    "lint:fix": "eslint --ext .js,.jsx,.ts,.tsx,.vue --fix ."
+    "format": "yarn lint --fix && prettier --write **/*.{html,scss,json}",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx,.vue"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^2.17.0",
@@ -35,7 +34,11 @@
     "pre-commit": "lint-staged"
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx,vue,html,scss,json}": [
+    "*.{html,scss,json}": [
+      "prettier --write",
+      "git add"
+    ],
+    "*.{js,jsx,ts,tsx,vue}": [
       "eslint --ext .js,.jsx,.ts,.tsx,.vue --fix",
       "git add"
     ]
