@@ -30,19 +30,9 @@
     "@vue/eslint-config-typescript": "^5.0.1",
     "@vue/test-utils": "1.0.0-beta.29",
     "eslint-plugin-vue": "^6.1.2",
-    "lint-staged": "^9.5.0",
     "node-sass": "^4.12.0",
     "sass-loader": "^8.0.0",
     "typescript": "~3.5.3",
     "vue-template-compiler": "^2.6.10"
-  },
-  "gitHooks": {
-    "pre-commit": "lint-staged"
-  },
-  "lint-staged": {
-    "*.{js,vue,ts}": [
-      "vue-cli-service lint",
-      "git add"
-    ]
   }
 }
