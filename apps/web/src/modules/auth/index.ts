@@ -1,1 +1,2 @@
+import './routes';
 import './store';

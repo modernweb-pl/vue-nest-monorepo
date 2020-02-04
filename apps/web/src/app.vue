@@ -6,6 +6,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
+
 import './layout';
 import './modules';
 
