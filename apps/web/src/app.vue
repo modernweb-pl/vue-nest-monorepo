@@ -7,6 +7,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import './layout';
+import './modules';
 
 const DEFAULT_LAYOUT = 'default';
 

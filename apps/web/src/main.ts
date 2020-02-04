@@ -3,9 +3,9 @@ import Vue from 'vue';
 import App from './app.vue';
 import './registerServiceWorker';
 import router from './router';
-import store from './store';
+import store from './core/store';
 
-Vue.config.productionTip = false;
+Vue.config.productionTip = process.env.NODE_ENV === 'production';
 
 Vue.use(BootstrapVue);
 
