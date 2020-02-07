@@ -3,3 +3,9 @@ body,
 .layout {
   height: 100%;
 }
+
+.layout {
+  > .navbar {
+    margin-bottom: map-get($spacers, 3);
+  }
+}

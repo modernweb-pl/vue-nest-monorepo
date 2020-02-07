@@ -8,20 +8,40 @@
       <b-navbar-nav>
         <b-nav-item to="/">Home</b-nav-item>
         <b-nav-item to="/about">About</b-nav-item>
-        <b-nav-item to="/login">Login</b-nav-item>
       </b-navbar-nav>
 
       <!-- Right aligned nav items -->
       <b-navbar-nav class="ml-auto">
-        <b-nav-item-dropdown right>
-          <!-- Using 'button-content' slot -->
-          <template v-slot:button-content>
-            <em>User</em>
-          </template>
-          <b-dropdown-item href="#">Profile</b-dropdown-item>
-          <b-dropdown-item href="#">Sign Out</b-dropdown-item>
+        <b-nav-item-dropdown right v-if="loggedIn" text="User">
+          <b-dropdown-item :to="routes.profile">Profile</b-dropdown-item>
+          <b-dropdown-item :to="routes.logout">Logout</b-dropdown-item>
         </b-nav-item-dropdown>
+        <b-nav-item :to="routes.login" v-else>Login</b-nav-item>
       </b-navbar-nav>
     </b-collapse>
   </b-navbar>
 </template>
+
+<script lang="ts">
+import Vue from 'vue';
+import { mapGetters } from 'vuex';
+import { AuthRoute } from '~app/modules/auth/routes';
+import { authGetters } from '~app/modules/auth/store';
+
+export default Vue.extend({
+  data() {
+    return {
+      routes: {
+        login: { name: AuthRoute.LOGIN },
+        logout: { name: AuthRoute.LOGOUT },
+        profile: { name: AuthRoute.PROFILE },
+      },
+    };
+  },
+  computed: {
+    ...mapGetters({
+      loggedIn: authGetters.loggedIn,
+    }),
+  },
+});
+</script>
