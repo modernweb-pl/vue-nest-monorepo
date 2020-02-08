@@ -1,5 +1,4 @@
-import { Route } from 'vue-router';
-import { RawLocation } from 'vue-router/types/router';
+import { RawLocation, Route } from 'vue-router';
 import router from '~app/core/router';
 import store from '~app/core/store';
 import { authActions, authGetters } from './store';

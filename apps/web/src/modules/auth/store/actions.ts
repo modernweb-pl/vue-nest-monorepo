@@ -1,9 +1,8 @@
 import { RootState } from '~app/core/store';
-import { createActionFactory, createActionMap } from '~app/shared/store';
-import { AuthToken } from '../domain/token';
-import { authGetters } from './getters';
-import { authMutations } from './mutations';
-import { AUTH_NAMESPACE, AuthState } from './state';
+import { createActionFactory } from '~app/shared/store';
+import { AuthToken, loadStoredToken } from '../domain/token';
+import { authGetters, authMutations } from './index';
+import { AuthState } from './state';
 
 export interface LoginPayload {
   login: string;
@@ -13,6 +12,10 @@ export interface LoginPayload {
 const createAction = createActionFactory<AuthState, RootState>();
 
 export const actions = {
+  loadToken: createAction(({ commit }) => {
+    return loadStoredToken().then(token => commit(authMutations.setToken, token, { root: true }));
+  }),
+
   login: createAction(({ commit, getters }, { login, password }: LoginPayload) => {
     if (getters[authGetters.loggedIn]) {
       return;
@@ -22,7 +25,7 @@ export const actions = {
     return new Promise((resolve, reject) =>
       setTimeout(() => {
         if (login === 'admin@example.com' && password === 'password') {
-          const res: AuthToken = { access: 'access_token' };
+          const res: AuthToken = { access: 'access_token', refresh: 'refresh_token' };
 
           commit(authMutations.setToken, res, { root: true });
           resolve(res);
@@ -37,8 +40,3 @@ export const actions = {
     commit(authMutations.setToken, null, { root: true });
   }),
 };
-
-export const authActions = createActionMap<typeof actions, AuthState, RootState>(
-  AUTH_NAMESPACE,
-  actions,
-);

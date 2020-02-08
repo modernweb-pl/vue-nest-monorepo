@@ -1,9 +1,10 @@
 import { Module } from 'vuex';
-import store, { RootState } from '~app/core/store';
-import { actions, authActions } from './actions';
-import { authGetters, getters } from './getters';
-import { authMutations, mutations } from './mutations';
-import { AUTH_NAMESPACE, AuthState, initialAuthState } from './state';
+import { RootState } from '~app/core/store';
+import { createActionMap, createGetterMap, createMutationMap } from '~app/shared/store';
+import { actions } from './actions';
+import { getters } from './getters';
+import { mutations } from './mutations';
+import { AuthState, initialAuthState } from './state';
 
 export const authStore: Module<AuthState, RootState> = {
   namespaced: true,
@@ -13,6 +14,19 @@ export const authStore: Module<AuthState, RootState> = {
   getters,
 };
 
-store.registerModule(AUTH_NAMESPACE, authStore);
+export const AUTH_NAMESPACE = 'auth';
 
-export { authGetters, authMutations, authActions };
+export const authActions = createActionMap<typeof actions, AuthState, RootState>(
+  AUTH_NAMESPACE,
+  actions,
+);
+
+export const authMutations = createMutationMap<typeof mutations, AuthState>(
+  AUTH_NAMESPACE,
+  mutations,
+);
+
+export const authGetters = createGetterMap<typeof getters, AuthState, RootState>(
+  AUTH_NAMESPACE,
+  getters,
+);
