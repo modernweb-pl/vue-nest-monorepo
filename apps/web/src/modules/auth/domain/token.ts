@@ -2,6 +2,7 @@ import { InitializerTask } from '~app/core';
 import store from '~app/core/store';
 import { authActions } from '../store';
 
+// TODO shared DTO
 export interface AuthToken {
   access: string;
   refresh: string;
