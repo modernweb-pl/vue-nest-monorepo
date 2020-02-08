@@ -1,3 +1,4 @@
+import { InitializerTask } from '~app/core';
 import store from '~app/core/store';
 import { authActions } from '../store';
 
@@ -18,6 +19,6 @@ export function loadStoredToken(): Promise<AuthToken | null> {
   return Promise.resolve(JSON.parse(window.localStorage.getItem(TOKEN_STORAGE_KEY) || 'null'));
 }
 
-export function tokenInitializer(): Promise<AuthToken | null> {
+export const tokenInitializer: InitializerTask = (): Promise<AuthToken | null> => {
   return store.dispatch(authActions.loadToken);
-}
+};
