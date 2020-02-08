@@ -19,8 +19,8 @@
                 <input
                   name="login"
                   class="form-control"
-                  type="email"
-                  placeholder="Email"
+                  type="text"
+                  placeholder="Login"
                   v-model="form.login"
                 />
               </div>

@@ -2,13 +2,20 @@ export type InitializerTask = () => Promise<any>;
 
 export function InitializerFactory() {
   const tasks: InitializerTask[] = [];
+  let resolved: Promise<any>;
 
   function register(task: InitializerTask) {
     tasks.push(task);
   }
 
   function resolve(): Promise<any> {
-    return Promise.all(tasks.map(initializer => initializer()));
+    if (resolved) {
+      return resolved;
+    }
+
+    resolved = Promise.all(tasks.map(initializer => initializer()));
+
+    return resolved;
   }
 
   return {

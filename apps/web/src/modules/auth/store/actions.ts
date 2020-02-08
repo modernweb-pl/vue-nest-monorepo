@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { RootState } from '~app/core/store';
 import { createActionFactory } from '~app/shared/store';
 import { AuthToken, loadStoredToken } from '../domain/token';
@@ -21,19 +22,12 @@ export const actions = {
       return;
     }
 
-    // TODO API service
-    return new Promise((resolve, reject) =>
-      setTimeout(() => {
-        if (login === 'admin@example.com' && password === 'password') {
-          const res: AuthToken = { access: 'access_token', refresh: 'refresh_token' };
-
-          commit(authMutations.setToken, res, { root: true });
-          resolve(res);
-        } else {
-          reject();
-        }
-      }, 500),
-    );
+    return axios
+      .post<AuthToken>('/auth', {
+        login,
+        password,
+      })
+      .then(res => commit(authMutations.setToken, res.data, { root: true }));
   }),
 
   logout: createAction(({ commit }) => {
