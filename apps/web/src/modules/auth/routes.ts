@@ -1,4 +1,5 @@
 import { RawLocation, Route } from 'vue-router';
+import { appInitializer } from '~app/core';
 import router from '~app/core/router';
 import store from '~app/core/store';
 import { authActions, authGetters } from './store';
@@ -52,10 +53,12 @@ router.addRoutes([
 ]);
 
 router.beforeEach((to, from, next) => {
-  const authRequired = to.matched.some(route => route.meta.authRequired);
-  const loggedIn = store.getters[authGetters.loggedIn];
+  appInitializer.resolve().then(() => {
+    const authRequired = to.matched.some(route => route.meta.authRequired);
+    const loggedIn = store.getters[authGetters.loggedIn];
 
-  if (!authRequired || loggedIn) return next();
+    if (!authRequired || loggedIn) return next();
 
-  next({ name: AuthRoute.LOGIN, query: { back: to.fullPath } });
+    next({ name: AuthRoute.LOGIN, query: { back: to.fullPath } });
+  });
 });
