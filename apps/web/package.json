@@ -1,6 +1,9 @@
 {
   "name": "@app/web",
   "version": "0.0.1",
+  "description": "",
+  "author": "",
+  "license": "MIT",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",

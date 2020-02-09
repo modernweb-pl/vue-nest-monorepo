@@ -1,7 +1,7 @@
-import axios from 'axios';
 import { RootState } from '~app/core/store';
 import { createActionFactory } from '~app/shared/store';
-import { AuthToken, loadStoredToken } from '../domain/token';
+import { authenticate } from '../domain/auth.service';
+import { loadStoredToken } from '../domain/token';
 import { authGetters, authMutations } from './index';
 import { AuthState } from './state';
 
@@ -22,12 +22,9 @@ export const actions = {
       return;
     }
 
-    return axios
-      .post<AuthToken>('/auth', {
-        login,
-        password,
-      })
-      .then(res => commit(authMutations.setToken, res.data, { root: true }));
+    return authenticate(login, password).then(token =>
+      commit(authMutations.setToken, token, { root: true }),
+    );
   }),
 
   logout: createAction(({ commit }) => {
