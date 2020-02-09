@@ -1,7 +1,12 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "sourceMap": true
+    "sourceMap": true,
+    "moduleResolution": "node",
+    "baseUrl": ".",
+    "paths": {
+      "@app/dto": ["libs/dto/lib/index.ts"]
+    }
   },
   "exclude": ["node_modules", "dist"]
 }

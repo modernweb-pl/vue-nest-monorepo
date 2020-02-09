@@ -1,4 +1,4 @@
-import { AuthToken } from '../domain/token';
+import { AuthTokenDto } from '@app/dto';
 
 // TODO interface shared with backend
 export interface User {
@@ -7,7 +7,7 @@ export interface User {
 }
 
 export interface AuthState {
-  token: AuthToken | null;
+  token: AuthTokenDto | null;
   user: User | null;
 }
 

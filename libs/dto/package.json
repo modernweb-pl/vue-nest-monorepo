@@ -1,0 +1,9 @@
+{
+  "name": "@app/dto",
+  "version": "0.0.1",
+  "description": "",
+  "author": "",
+  "license": "MIT",
+  "private": true,
+  "main": "index.ts"
+}
