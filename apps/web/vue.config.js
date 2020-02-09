@@ -6,6 +6,7 @@ module.exports = {
   css: {
     sourceMap: isDev,
   },
+  outputDir: '../../dist/web',
   chainWebpack: config => {
     config.resolve.alias.set('~app', path.resolve('./src'));
   },
