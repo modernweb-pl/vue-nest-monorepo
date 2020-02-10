@@ -1,0 +1,13 @@
+version: '3.7'
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: apps/web/Dockerfile
+    environment:
+      - API_URL=http://localhost:3000/api
+      - CONFIG_VARS=API_URL
+    ports:
+      - 8080:80
+    tty: true

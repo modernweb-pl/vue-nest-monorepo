@@ -15,6 +15,8 @@
   "scripts": {
     "api": "yarn workspace @app/api",
     "web": "yarn workspace @app/web",
+    "web:docker": "docker build . -t docker.pkg.github.com/modernweb-pl/vue-nest-monorepo/web -f apps/web/Dockerfile",
+    "web:docker:push": "docker push docker.pkg.github.com/modernweb-pl/vue-nest-monorepo/web",
     "bootstrap": "lerna bootstrap",
     "format": "yarn lint --fix && prettier --write **/*.{html,scss,json}",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx,.vue"
