@@ -2,7 +2,7 @@ import axios from 'axios';
 import { appInitializer, InitializerTask } from '~app/core';
 
 export interface Config {
-  apiUrl: string;
+  API_URL: string;
 }
 
 const PUBLIC_PATH = process.env.BASE_URL;
