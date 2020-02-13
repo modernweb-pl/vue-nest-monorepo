@@ -12,18 +12,8 @@ export class UsersService {
   private readonly users: User[] = [
     {
       id: 1,
-      login: 'john',
-      password: 'changeme',
-    },
-    {
-      id: 2,
-      login: 'chris',
-      password: 'secret',
-    },
-    {
-      id: 3,
-      login: 'maria',
-      password: 'guess',
+      login: 'demo',
+      password: 'demo',
     },
   ];
 

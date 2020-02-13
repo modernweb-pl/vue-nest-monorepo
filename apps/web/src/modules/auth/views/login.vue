@@ -43,7 +43,7 @@
             </div>
             <div class="form-group text-center">
               <small class="text-muted">
-                Use <strong>admin@example.com</strong> / <strong>password</strong> to login
+                Use <strong>demo</strong> / <strong>demo</strong> to login
               </small>
             </div>
             <div class="form-group">
