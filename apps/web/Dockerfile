@@ -1,17 +1,21 @@
-FROM node:lts as build-stage
+FROM node:lts as builder
 
 WORKDIR /app
 
 COPY package.json yarn.lock ./
-COPY apps/web/package.json ./apps/web/
-COPY libs/dto/package.json ./libs/dto/
-
+COPY apps/web/package.json apps/web/
+COPY libs/dto/package.json libs/dto/
 RUN yarn --frozen-lockfile
 
-COPY . .
+COPY tsconfig.json .
+COPY apps/web apps/web
+COPY libs libs
+
 RUN yarn web build
 
-FROM nginx:stable as production-stage
+### Production image
+
+FROM nginx:stable as app
 
 # This tool converts env vars into json to be injected into the config
 ADD https://s3.amazonaws.com/se-com-docs/bins/json_env /usr/local/bin/
@@ -25,7 +29,7 @@ RUN chmod +x /usr/local/bin/entrypoint.sh
 ENV CONFIG_FILE_PATH /app/config/app.json
 
 RUN mkdir /app
-COPY --from=build-stage /app/dist/web /app
+COPY --from=builder /app/dist/web /app
 RUN rm -rf /app/config/*
 
 ENTRYPOINT ["entrypoint.sh"]

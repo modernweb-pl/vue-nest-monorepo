@@ -11,3 +11,13 @@ services:
     ports:
       - 8080:80
     tty: true
+
+  api:
+    build:
+      context: .
+      dockerfile: apps/api/Dockerfile
+    environment:
+      - AUTH_SECRET=ThisIsNotASecretKeyJustForTesting
+    ports:
+      - 3000:3000
+    tty: true

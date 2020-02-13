@@ -14,6 +14,8 @@
   },
   "scripts": {
     "api": "yarn workspace @app/api",
+    "api:docker": "docker build . -t docker.pkg.github.com/modernweb-pl/vue-nest-monorepo/api -f apps/api/Dockerfile",
+    "api:docker:push": "docker push docker.pkg.github.com/modernweb-pl/vue-nest-monorepo/api",
     "web": "yarn workspace @app/web",
     "web:docker": "docker build . -t docker.pkg.github.com/modernweb-pl/vue-nest-monorepo/web -f apps/web/Dockerfile",
     "web:docker:push": "docker push docker.pkg.github.com/modernweb-pl/vue-nest-monorepo/web",
