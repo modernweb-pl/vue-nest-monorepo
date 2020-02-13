@@ -6,8 +6,6 @@
     "strict": true,
     "jsx": "preserve",
     "importHelpers": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
     "baseUrl": ".",
     "types": ["webpack-env", "jest"],
     "paths": {
