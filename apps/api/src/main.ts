@@ -1,15 +1,17 @@
+import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  const config = app.get(ConfigService);
 
-  // TODO configure allowed origins
-  app.enableCors();
+  const globalPrefix = config.get('globalPrefix');
+  const port = config.get('port');
 
-  const globalPrefix = 'api';
+  app.enableCors(config.get('cors'));
   app.setGlobalPrefix(globalPrefix);
-  const port = process.env.PORT || 3000;
+
   await app.listen(port, () => {
     // eslint-disable-next-line no-console
     console.log('Listening at http://localhost:' + port + '/' + globalPrefix);
