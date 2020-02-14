@@ -13,6 +13,7 @@ import Vue from 'vue';
 import { appInitializer } from '~app/core';
 import { AppSplash } from '~app/layout';
 
+import './shared/bootstrap-vue';
 import './layout';
 import './modules';
 

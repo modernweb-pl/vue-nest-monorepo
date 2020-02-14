@@ -10,5 +10,16 @@ module.exports = {
   outputDir: '../../dist/web',
   chainWebpack: config => {
     config.resolve.alias.set('~app', path.resolve('./src'));
+
+    if (process.argv.some(arg => arg.includes('report'))) {
+      config.optimization.concatenateModules(false);
+
+      const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+      config.plugin('bundle-analyzer').use(
+        new BundleAnalyzerPlugin({
+          generateStatsFile: true,
+        }),
+      );
+    }
   },
 };
