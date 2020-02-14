@@ -41,6 +41,7 @@ router.beforeResolve(async (routeTo, routeFrom, next) => {
         // If a `beforeResolve` hook is defined, call it with
         // the same arguments as the `beforeEnter` hook.
         if (route.meta && route.meta.beforeResolve) {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           route.meta.beforeResolve(routeTo, routeFrom, (...args: any[]) => {
             // If the user chose to redirect...
             if (args.length) {

@@ -1,3 +1,7 @@
+const isDev = !process.env.NODE_ENV || process.env.NODE_ENV === 'development';
+
+console.log(process.env.NODE_ENV);
+
 module.exports = {
   root: true,
   parser: '@typescript-eslint/parser',
@@ -10,9 +14,9 @@ module.exports = {
     'plugin:prettier/recommended',
   ],
   rules: {
-    'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'warn',
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'warn',
-    'prettier/prettier': process.env.NODE_ENV === 'production' ? 'error' : 'warn',
+    'no-console': isDev ? 'warn' : 'error',
+    'no-debugger': isDev ? 'warn' : 'error',
+    'prettier/prettier': isDev ? 'warn' : 'error',
     '@typescript-eslint/explicit-function-return-type': 'off',
   },
   overrides: [

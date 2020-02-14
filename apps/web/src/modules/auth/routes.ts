@@ -29,11 +29,7 @@ router.addRoutes([
     name: AuthRoute.LOGOUT,
     meta: {
       authRequired: true,
-      beforeResolve<V>(
-        to: Route,
-        from: Route,
-        next: (to?: RawLocation | false | ((vm: V) => any) | void) => void,
-      ) {
+      beforeResolve(to: Route, from: Route, next: (to?: RawLocation) => void) {
         store.dispatch(authActions.logout).then(() => {
           const authRequiredOnPreviousRoute = from.matched.some(route => route.meta.authRequired);
           // navigate back to previous page, or home as a fallback
