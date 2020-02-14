@@ -34,7 +34,7 @@ export const configFactory = (): Config => {
     cors: {
       origin: process.env.CORS_ORIGIN
         ? process.env.CORS_ORIGIN.split(',').map(
-            origin => new RegExp(`^https?://${origin}:?[0-9]+$`),
+            origin => new RegExp(`^https?://${origin}:?[0-9]*$`),
           )
         : false,
     },
