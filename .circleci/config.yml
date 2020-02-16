@@ -15,11 +15,12 @@ executors:
 
 commands:
   install:
-    cache-version:
-      default: v1
-      description: |
-        Cache version; increment this for a fresh cache
-      type: string
+    parameters:
+      cache-version:
+        default: v1
+        description: |
+          Cache version; increment this for a fresh cache
+        type: string
     steps:
       - restore_cache:
           keys:
