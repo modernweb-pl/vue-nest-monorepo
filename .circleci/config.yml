@@ -54,6 +54,13 @@ jobs:
       - install
       - run: yarn web build
       - run: yarn api build
+  test-e2e:
+    executor: node
+    steps:
+      - checkout
+      - install
+      - run: yarn web test:e2e
+      - run: yarn api test:e2e
 
 workflows:
   version: 2
@@ -61,4 +68,5 @@ workflows:
     jobs:
       - lint
       - test-unit
+      - test-e2e
       - build
