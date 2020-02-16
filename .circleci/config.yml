@@ -6,7 +6,6 @@ executors:
       - image: circleci/node:<<parameters.tag>>
     environment:
       NODE_ENV: "ci"
-      NODE_VERSION: <<parameters.tag>>
     parameters:
       tag:
         default: lts
@@ -16,23 +15,22 @@ executors:
 
 commands:
   install:
+    cache-version:
+      default: v1
+      description: |
+        Cache version; increment this for a fresh cache
+      type: string
     steps:
       - restore_cache:
           keys:
-            - node-deps-{{ .Environment.NODE_VERSION }}-{{ checksum "yarn.lock"}}
-            - node-deps-{{ .Environment.NODE_VERSION }}
-      - run: echo ${NODE_VERSION}
+            - node-deps-<<parameters.cache-version>>-{{ checksum "yarn.lock"}}
+            - node-deps-<<parameters.cache-version>>-
       - run: yarn --frozen-lockfile
-      - run: pwd
-      - run: ls -al ~
-      - run: yarn cache dir
-      - run: export YARN_CACHE_DIR=`yarn cache dir`
-      - run: echo ${YARN_CACHE_DIR}
-#      - save_cache:
-#          key: node-deps-{{ .Environment.NODE_VERSION }}-{{ checksum "yarn.lock"}}
-#          paths:
-#            - node_modules
-#            - {{ .Environment.YARN_CACHE_DIR }}
+      - save_cache:
+          key: node-deps-<<parameters.cache-version>>-{{ checksum "yarn.lock"}}
+          paths:
+            - node_modules
+            - ~/.cache/yarn
 
 jobs:
   lint:
