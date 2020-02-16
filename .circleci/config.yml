@@ -38,8 +38,8 @@ commands:
             - ~/.cache/yarn
       - persist_to_workspace:
           root: ~
-            paths:
-              - project
+          paths:
+            - project
 
 jobs:
   lint:
