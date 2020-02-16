@@ -14,19 +14,15 @@ executors:
         type: string
 
 commands:
-  with-cache:
-    parameters:
-      steps:
-        description: |
-          Input any custom steps to run with your Node cache
-        type: steps
+  install:
     steps:
       - restore_cache:
           keys:
             - node-deps-{{ checksum "yarn.lock"}}
-      - steps: <<parameters.steps>>
-      - run: ls -al ~
-      - run: yarn cache dir
+      - steps:
+        - run: yarn --frozen-lockfile
+        - run: ls -al ~
+        - run: yarn cache dir
       - save_cache:
           key: node-deps-{{ checksum "yarn.lock"}}
           paths:
@@ -37,9 +33,7 @@ jobs:
     executor: node
     steps:
       - checkout
-      - with-cache:
-          steps:
-            - run: yarn --frozen-lockfile
+      - install
       - run: yarn lint
 
 workflows:
