@@ -1,19 +1,43 @@
 version: 2.1
 
-orbs:
-  node: circleci/node@1.1
+executors:
+  node:
+    docker:
+      - image: circleci/node:<<parameters.tag>>
+    environment:
+      NODE_ENV: "ci"
+    parameters:
+      tag:
+        default: lts
+        description: |
+          Pick a specific circleci/node image variant: https://hub.docker.com/r/circleci/node/tags
+        type: string
+
+commands:
+  with-cache:
+    parameters:
+      steps:
+        description: |
+          Input any custom steps to run with your Node cache
+        type: steps
+    steps:
+      - restore_cache:
+          keys:
+            - node-deps-{{ checksum "yarn.lock"}}
+      - steps: <<parameters.steps>>
+        - run: ls -al ~
+        - run: yarn cache dir
+      - save_cache:
+          key: node-deps-{{ checksum "yarn.lock"}}
+          paths:
+            - ~/project/node_modules
 
 jobs:
   lint:
-    executor:
-      name: node/default
-      tag: '10'
-    environment:
-      - NODE_ENV: "ci"
+    executor: node
     steps:
       - checkout
-      - node/with-cache:
-          cache-key: yarn.lock
+      - with-cache:
           steps:
             - run: yarn --frozen-lockfile
       - run: yarn lint
