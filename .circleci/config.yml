@@ -21,19 +21,20 @@ commands:
             - node-deps-{{ checksum "yarn.lock"}}
       - steps:
         - run: yarn --frozen-lockfile
-        - run: ls -al ~
+        - run: pwd
+        - run: ls -al
         - run: yarn cache dir
       - save_cache:
           key: node-deps-{{ checksum "yarn.lock"}}
           paths:
-            - ~/project/node_modules
+            - node_modules
 
 jobs:
   lint:
     executor: node
     steps:
       - checkout
-      - install
+      - install:
       - run: yarn lint
 
 workflows:
