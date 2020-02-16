@@ -14,16 +14,15 @@ executors:
         type: string
 
 commands:
-  install-deps:
+  install:
     steps:
       - restore_cache:
           keys:
             - node-deps-{{ checksum "yarn.lock"}}
-      - steps:
-        - run: yarn --frozen-lockfile
-        - run: pwd
-        - run: ls -al
-        - run: yarn cache dir
+      - run: yarn --frozen-lockfile
+      - run: pwd
+      - run: ls -al
+      - run: yarn cache dir
       - save_cache:
           key: node-deps-{{ checksum "yarn.lock"}}
           paths:
@@ -34,7 +33,7 @@ jobs:
     executor: node
     steps:
       - checkout
-      - install-deps:
+      - install
       - run: yarn lint
 
 workflows:
