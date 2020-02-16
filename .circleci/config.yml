@@ -25,8 +25,8 @@ commands:
           keys:
             - node-deps-{{ checksum "yarn.lock"}}
       - steps: <<parameters.steps>>
-        - run: ls -al ~
-        - run: yarn cache dir
+      - run: ls -al ~
+      - run: yarn cache dir
       - save_cache:
           key: node-deps-{{ checksum "yarn.lock"}}
           paths:
