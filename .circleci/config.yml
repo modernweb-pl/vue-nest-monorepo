@@ -34,7 +34,7 @@ jobs:
     executor: node
     steps:
       - checkout
-      - install-deps
+      - install-deps:
       - run: yarn lint
 
 workflows:
