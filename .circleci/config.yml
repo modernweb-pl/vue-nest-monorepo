@@ -40,6 +40,13 @@ jobs:
       - checkout
       - install
       - run: yarn lint
+  test-unit:
+    executor: node
+    steps:
+      - checkout
+      - install
+      - run: yarn web test
+      - run: yarn api test
   build:
     executor: node
     steps:
@@ -53,4 +60,5 @@ workflows:
   verify:
     jobs:
       - lint
+      - test-unit
       - build
