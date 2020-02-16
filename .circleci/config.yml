@@ -14,7 +14,7 @@ executors:
         type: string
 
 commands:
-  install:
+  install-deps:
     steps:
       - restore_cache:
           keys:
@@ -34,7 +34,7 @@ jobs:
     executor: node
     steps:
       - checkout
-      - install:
+      - install-deps
       - run: yarn lint
 
 workflows:
