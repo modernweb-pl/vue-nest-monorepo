@@ -17,7 +17,7 @@ executors:
         type: string
 
 commands:
-  install:
+  setup:
     parameters:
       cache-version:
         default: v1
@@ -25,6 +25,7 @@ commands:
           Cache version; increment this for a fresh cache
         type: string
     steps:
+      - checkout
       - restore_cache:
           keys:
             - node-deps-<<parameters.cache-version>>-{{ checksum "yarn.lock"}}
@@ -45,7 +46,7 @@ jobs:
   install:
     executor: node
     steps:
-      - install
+      - setup
   lint:
     executor: node
     steps:
