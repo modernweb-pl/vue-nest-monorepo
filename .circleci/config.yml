@@ -28,11 +28,11 @@ commands:
       - run: yarn cache dir
       - run: export YARN_CACHE_DIR=`yarn cache dir`
       - run: echo ${YARN_CACHE_DIR}
-      - save_cache:
-          key: node-deps-{{ .Environment.NODE_VERSION }}-{{ checksum "yarn.lock"}}
-          paths:
-            - node_modules
-            - {{ .Environment.YARN_CACHE_DIR }}
+#      - save_cache:
+#          key: node-deps-{{ .Environment.NODE_VERSION }}-{{ checksum "yarn.lock"}}
+#          paths:
+#            - node_modules
+#            - {{ .Environment.YARN_CACHE_DIR }}
 
 jobs:
   lint:
