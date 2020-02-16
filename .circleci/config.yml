@@ -21,15 +21,18 @@ commands:
           keys:
             - node-deps-{{ .Environment.NODE_VERSION }}-{{ checksum "yarn.lock"}}
             - node-deps-{{ .Environment.NODE_VERSION }}
+      - run: echo ${NODE_VERSION}
       - run: yarn --frozen-lockfile
       - run: pwd
       - run: ls -al ~
       - run: yarn cache dir
+      - run: export YARN_CACHE_DIR=`yarn cache dir`
+      - run: echo ${YARN_CACHE_DIR}
       - save_cache:
           key: node-deps-{{ .Environment.NODE_VERSION }}-{{ checksum "yarn.lock"}}
           paths:
             - node_modules
-            - ${yarn cache dir}
+            - {{ .Environment.YARN_CACHE_DIR }}
 
 jobs:
   lint:
