@@ -42,6 +42,10 @@ commands:
             - project
 
 jobs:
+  install:
+    executor: node
+    steps:
+      - install
   lint:
     executor: node
     steps:
