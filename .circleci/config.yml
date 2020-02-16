@@ -5,12 +5,15 @@ executors:
     docker:
       - image: circleci/node:<<parameters.tag>>
     environment:
-      NODE_ENV: "ci"
+      NODE_ENV: <<parameters.env>>
     parameters:
       tag:
         default: lts
         description: |
           Pick a specific circleci/node image variant: https://hub.docker.com/r/circleci/node/tags
+        type: string
+      env:
+        default: "ci"
         type: string
 
 commands:
@@ -26,23 +29,31 @@ commands:
           keys:
             - node-deps-<<parameters.cache-version>>-{{ checksum "yarn.lock"}}
             - node-deps-<<parameters.cache-version>>-
+      - run: echo ${NODE_ENV}
       - run: yarn --frozen-lockfile
       - save_cache:
           key: node-deps-<<parameters.cache-version>>-{{ checksum "yarn.lock"}}
           paths:
             - node_modules
             - ~/.cache/yarn
+      - persist_to_workspace:
+          root: ~
+            paths:
+              - project
 
 jobs:
   lint:
     executor: node
     steps:
-      - checkout
-      - install
+      - attach_workspace:
+          at: ~
       - run: yarn lint
 
 workflows:
   version: 2
   verify:
     jobs:
-      - lint
+      - install
+      - lint:
+          requires:
+            - install
