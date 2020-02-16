@@ -8,6 +8,8 @@ jobs:
     executor:
       name: node/default
       tag: '10'
+    environment:
+      - NODE_ENV: "ci"
     steps:
       - checkout
       - node/with-cache:
