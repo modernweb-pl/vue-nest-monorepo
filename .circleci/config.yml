@@ -4,9 +4,9 @@ executors:
   node:
     docker:
       - image: circleci/node:<<parameters.tag>>
-    environment:
-      NODE_ENV: "ci"
-      NODE_VERSION: <<parameters.tag>>
+      environment:
+        NODE_ENV: "ci"
+        NODE_VERSION: <<parameters.tag>>
     parameters:
       tag:
         default: lts
