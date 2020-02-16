@@ -1,17 +1,48 @@
 version: 2.1
 
-orbs:
-  node: circleci/node@1.1
+executors:
+  node:
+    docker:
+      - image: circleci/node:<<parameters.tag>>
+    environment:
+      NODE_ENV: "ci"
+    parameters:
+      tag:
+        default: lts
+        description: |
+          Pick a specific circleci/node image variant: https://hub.docker.com/r/circleci/node/tags
+        type: string
+
+commands:
+  install:
+    parameters:
+      cache-version:
+        default: v1
+        description: |
+          Cache version; increment this for a fresh cache
+        type: string
+    steps:
+      - restore_cache:
+          keys:
+            - node-deps-<<parameters.cache-version>>-{{ checksum "yarn.lock"}}
+            - node-deps-<<parameters.cache-version>>-
+      - run: yarn --frozen-lockfile
+      - save_cache:
+          key: node-deps-<<parameters.cache-version>>-{{ checksum "yarn.lock"}}
+          paths:
+            - node_modules
+            - ~/.cache/yarn
 
 jobs:
   lint:
-    executor:
-      name: node/default
-      tag: '10'
+    executor: node
     steps:
       - checkout
-      - node/with-cache:
-          cache-key: yarn.lock
-          steps:
-            - run: yarn install
+      - install
       - run: yarn lint
+
+workflows:
+  version: 2
+  verify:
+    jobs:
+      - lint
