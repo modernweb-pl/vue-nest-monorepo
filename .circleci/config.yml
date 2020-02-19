@@ -22,6 +22,7 @@ commands:
           Cache version; increment this for a fresh cache
         type: string
     steps:
+      - checkout
       - restore_cache:
           keys:
             - node-deps-<<parameters.cache-version>>-{{ checksum "yarn.lock"}}
@@ -33,95 +34,63 @@ commands:
           paths:
             - node_modules
             - ~/.cache
-      - persist_to_workspace:
-          root: ~/
-          paths:
-            - project
-            - .cache
+
+aliases:
+  - &setup
+    install:
+      cache-version: v2
 
 jobs:
-  setup:
-    executor: node
-    steps:
-      - checkout
-      - install:
-          cache-version: v2
   lint:
     executor: node
     steps:
-      - attach_workspace:
-          at: ~/
-      - run: pwd
-      - run: ls -al
-      - run: ls -al ..
+      - *setup
       - run: yarn lint
 
   # web
   web-test-unit:
     executor: node
     steps:
-      - attach_workspace:
-          at: ~/
+      - *setup
       - run: yarn web test
   web-test-e2e:
     executor: node
     steps:
-      - attach_workspace:
-          at: ~/
+      - *setup
       - run: yarn web test:e2e
   web-build:
     executor: node
     steps:
-      - attach_workspace:
-          at: ~/
+      - *setup
       - run: yarn web build
 
   # api
   api-test-unit:
     executor: node
     steps:
-      - attach_workspace:
-          at: ~/
+      - *setup
       - run: yarn api test
   api-test-e2e:
     executor: node
     steps:
-      - attach_workspace:
-          at: ~/
-      - run: yarn web test:e2e
+      - *setup
       - run: yarn api test:e2e
   api-build:
     executor: node
     steps:
-      - attach_workspace:
-          at: ~/
+      - *setup
       - run: yarn api build
 
 workflows:
   version: 2
   verify:
     jobs:
-      - setup
-      - lint:
-          requires:
-            - setup
+      - lint
       # web
-      - web-test-unit:
-          requires:
-            - setup
-#      - web-test-e2e:
-#          requires:
-#            - setup
-#      - web-build:
-#          requires:
-#            - setup
+      - web-test-unit
+      - web-test-e2e
+      - web-build
       # api
-#      - api-test-unit:
-#          requires:
-#            - setup
-#      - api-test-e2e:
-#          requires:
-#            - setup
-#      - api-build:
-#          requires:
-#            - setup
+      - api-test-unit
+      - api-test-e2e
+      - api-build
