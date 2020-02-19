@@ -8,7 +8,7 @@ executors:
       NODE_ENV: "ci"
     parameters:
       tag:
-        default: lts
+        default: lts-browsers
         description: |
           Pick a specific circleci/node image variant: https://hub.docker.com/r/circleci/node/tags
         type: string
@@ -26,47 +26,102 @@ commands:
           keys:
             - node-deps-<<parameters.cache-version>>-{{ checksum "yarn.lock"}}
             - node-deps-<<parameters.cache-version>>-
+            - node-deps-
       - run: yarn --frozen-lockfile
       - save_cache:
           key: node-deps-<<parameters.cache-version>>-{{ checksum "yarn.lock"}}
           paths:
             - node_modules
-            - ~/.cache/yarn
+            - ~/.cache
+      - persist_to_workspace:
+          root: ~/
+          paths:
+            - project
+            - .cache
 
 jobs:
+  setup:
+    executor: node
+    steps:
+      - checkout
+      - install:
+          cache-version: v2
   lint:
     executor: node
     steps:
-      - checkout
-      - install
+      - attach_workspace:
+          at: ~/
+      - run: pwd
+      - run: ls -al
+      - run: ls -al ..
       - run: yarn lint
-  test-unit:
+
+  # web
+  web-test-unit:
     executor: node
     steps:
-      - checkout
-      - install
+      - attach_workspace:
+          at: ~/
       - run: yarn web test
-      - run: yarn api test
-  build:
+  web-test-e2e:
     executor: node
     steps:
-      - checkout
-      - install
+      - attach_workspace:
+          at: ~/
+      - run: yarn web test:e2e
+  web-build:
+    executor: node
+    steps:
+      - attach_workspace:
+          at: ~/
       - run: yarn web build
-      - run: yarn api build
-  test-e2e:
+
+  # api
+  api-test-unit:
     executor: node
     steps:
-      - checkout
-      - install
+      - attach_workspace:
+          at: ~/
+      - run: yarn api test
+  api-test-e2e:
+    executor: node
+    steps:
+      - attach_workspace:
+          at: ~/
       - run: yarn web test:e2e
       - run: yarn api test:e2e
+  api-build:
+    executor: node
+    steps:
+      - attach_workspace:
+          at: ~/
+      - run: yarn api build
 
 workflows:
   version: 2
   verify:
     jobs:
-      - lint
-      - test-unit
-      - test-e2e
-      - build
+      - setup
+      - lint:
+          requires:
+            - setup
+      # web
+      - web-test-unit:
+          requires:
+            - setup
+#      - web-test-e2e:
+#          requires:
+#            - setup
+#      - web-build:
+#          requires:
+#            - setup
+      # api
+#      - api-test-unit:
+#          requires:
+#            - setup
+#      - api-test-e2e:
+#          requires:
+#            - setup
+#      - api-build:
+#          requires:
+#            - setup
