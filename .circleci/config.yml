@@ -72,8 +72,6 @@ jobs:
       - run: yarn api test
   api-test-e2e:
     executor: node
-    environment:
-      AUTH_SECRET: ThisIsNotASecretKey
     steps:
       - *setup
       - run: yarn api test:e2e
