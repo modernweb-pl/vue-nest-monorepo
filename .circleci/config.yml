@@ -8,7 +8,7 @@ executors:
       NODE_ENV: "ci"
     parameters:
       tag:
-        default: lts
+        default: lts-browsers
         description: |
           Pick a specific circleci/node image variant: https://hub.docker.com/r/circleci/node/tags
         type: string
@@ -22,27 +22,77 @@ commands:
           Cache version; increment this for a fresh cache
         type: string
     steps:
+      - checkout
       - restore_cache:
           keys:
             - node-deps-<<parameters.cache-version>>-{{ checksum "yarn.lock"}}
             - node-deps-<<parameters.cache-version>>-
+            - node-deps-
       - run: yarn --frozen-lockfile
       - save_cache:
           key: node-deps-<<parameters.cache-version>>-{{ checksum "yarn.lock"}}
           paths:
             - node_modules
-            - ~/.cache/yarn
+            - ~/.cache
+
+aliases:
+  - &setup
+    install:
+      cache-version: v2
 
 jobs:
   lint:
     executor: node
     steps:
-      - checkout
-      - install
+      - *setup
       - run: yarn lint
+
+  # web
+  web-test-unit:
+    executor: node
+    steps:
+      - *setup
+      - run: yarn web test
+  web-test-e2e:
+    executor: node
+    steps:
+      - *setup
+      - run: yarn web test:e2e
+  web-build:
+    executor: node
+    steps:
+      - *setup
+      - run: yarn web build
+
+  # api
+  api-test-unit:
+    executor: node
+    steps:
+      - *setup
+      - run: yarn api test
+  api-test-e2e:
+    executor: node
+    environment:
+      AUTH_SECRET: ThisIsNotASecretKey
+    steps:
+      - *setup
+      - run: yarn api test:e2e
+  api-build:
+    executor: node
+    steps:
+      - *setup
+      - run: yarn api build
 
 workflows:
   version: 2
   verify:
     jobs:
       - lint
+      # web
+      - web-test-unit
+      - web-test-e2e
+      - web-build
+      # api
+      - api-test-unit
+      - api-test-e2e
+      - api-build

@@ -3,7 +3,7 @@ import { CorsOptions } from '@nestjs/common/interfaces/external/cors-options.int
 
 export const configSchema = Joi.object({
   NODE_ENV: Joi.string()
-    .valid('development', 'staging', 'production')
+    .valid('development', 'ci', 'staging', 'production')
     .default('production'),
   PORT: Joi.number()
     .port()

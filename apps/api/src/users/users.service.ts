@@ -9,7 +9,7 @@ export interface User {
 
 @Injectable()
 export class UsersService {
-  private readonly users: User[] = [
+  protected readonly users: User[] = [
     {
       id: 1,
       login: 'demo',
