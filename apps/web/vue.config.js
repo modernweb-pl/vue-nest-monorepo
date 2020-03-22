@@ -8,10 +8,10 @@ module.exports = {
     sourceMap: isDev,
   },
   outputDir: '../../dist/web',
-  chainWebpack: config => {
+  chainWebpack: (config) => {
     config.resolve.alias.set('~app', path.resolve('./src'));
 
-    if (process.argv.some(arg => arg.includes('report'))) {
+    if (process.argv.some((arg) => arg.includes('report'))) {
       config.optimization.concatenateModules(false);
 
       const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');

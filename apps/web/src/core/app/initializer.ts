@@ -15,7 +15,7 @@ export function InitializerFactory() {
       return resolved;
     }
 
-    resolved = Promise.all(tasks.map(initializer => initializer()));
+    resolved = Promise.all(tasks.map((initializer) => initializer()));
 
     return resolved;
   }

@@ -11,7 +11,7 @@ export class UsersServiceMock extends UsersService {
   ];
 
   async findOne(login: string): Promise<User | undefined> {
-    return this.users.find(user => user.login === login);
+    return this.users.find((user) => user.login === login);
   }
 }
 

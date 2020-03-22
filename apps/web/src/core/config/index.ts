@@ -15,10 +15,10 @@ export const configInitializer: InitializerTask = () =>
     .get<Config>(PUBLIC_PATH + 'config/app.json')
     // fallback to default configuration
     .catch(() => axios.get<Config>(PUBLIC_PATH + 'config/app.default.json'))
-    .catch(e => {
+    .catch((e) => {
       console.error(e); // eslint-disable-line no-console
       return { data: null };
     })
-    .then(res => (appConfig = res.data));
+    .then((res) => (appConfig = res.data));
 
 appInitializer.register(configInitializer);
