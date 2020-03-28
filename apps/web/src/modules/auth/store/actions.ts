@@ -14,7 +14,7 @@ const createAction = createActionFactory<AuthState, RootState>();
 
 export const actions = {
   loadToken: createAction(({ commit }) => {
-    return loadStoredToken().then(token => commit(authMutations.setToken, token, { root: true }));
+    return loadStoredToken().then((token) => commit(authMutations.setToken, token, { root: true }));
   }),
 
   login: createAction(({ commit, getters }, { login, password }: LoginPayload) => {
@@ -22,7 +22,7 @@ export const actions = {
       return;
     }
 
-    return authenticate(login, password).then(token =>
+    return authenticate(login, password).then((token) =>
       commit(authMutations.setToken, token, { root: true }),
     );
   }),
