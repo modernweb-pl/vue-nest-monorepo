@@ -18,7 +18,7 @@ router.addRoutes([
     beforeEnter(to, from, next) {
       const loggedIn = store.getters[authGetters.loggedIn];
       if (loggedIn) {
-        return next(from.name ? from : { name: 'home' });
+        return next(from.name ? from.fullPath : { name: 'home' });
       }
 
       next();
@@ -33,7 +33,7 @@ router.addRoutes([
         store.dispatch(authActions.logout).then(() => {
           const authRequiredOnPreviousRoute = from.matched.some((route) => route.meta.authRequired);
           // navigate back to previous page, or home as a fallback
-          next(authRequiredOnPreviousRoute ? { name: 'home' } : { ...from });
+          next(authRequiredOnPreviousRoute ? { name: 'home' } : from.fullPath);
         });
       },
     },
