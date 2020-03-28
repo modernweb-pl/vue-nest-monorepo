@@ -8,6 +8,11 @@ module.exports = {
     sourceMap: isDev,
   },
   outputDir: '../../dist/web',
+
+  devServer: {
+    progress: false,
+  },
+
   chainWebpack: (config) => {
     config.resolve.alias.set('~app', path.resolve('./src'));
 
