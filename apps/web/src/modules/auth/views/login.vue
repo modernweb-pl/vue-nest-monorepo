@@ -5,54 +5,55 @@
         <article class="card-body">
           <h4 class="card-title text-center mb-4 mt-1">Sign in</h4>
           <hr />
-          <!-- TODO
-          <p class="text-success text-center">Some message goes here</p>
-          -->
-          <form @submit.prevent="submit">
-            <div class="form-group">
-              <div class="input-group">
+
+          <p class="alert alert-danger text-center" v-if="error">{{ error }}</p>
+
+          <b-form novalidate @submit.prevent="submit">
+            <b-form-group invalid-feedback="Field required" :state="valid.login">
+              <b-input-group>
                 <!-- TODO
-                <div class="input-group-prepend">
-                  <span class="input-group-text"> <i class="fa fa-user"></i> </span>
-                </div>
+                <template #prepend>
+                  <b-input-group-text><i class="fa fa-user"></i></b-input-group-text>
+                </template>
                 -->
-                <input
-                  name="login"
-                  class="form-control"
-                  type="text"
+                <b-form-input
+                  autofocus
                   placeholder="Login"
                   v-model="form.login"
+                  :state="valid.login"
                 />
-              </div>
-            </div>
-            <div class="form-group">
-              <div class="input-group">
+              </b-input-group>
+            </b-form-group>
+
+            <b-form-group invalid-feedback="Field required" :state="valid.password">
+              <b-input-group>
                 <!-- TODO
-                <div class="input-group-prepend">
-                  <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
-                </div>
+                <template #prepend>
+                  <b-input-group-text><i class="fa fa-lock"></i></b-input-group-text>
+                </template>
                 -->
-                <input
-                  class="form-control"
-                  name="password"
+                <b-form-input
                   type="password"
-                  placeholder="Password"
                   v-model="form.password"
+                  placeholder="Password"
+                  :state="valid.password"
                 />
-              </div>
-            </div>
-            <div class="form-group text-center">
+              </b-input-group>
+            </b-form-group>
+
+            <b-form-group class="text-center">
+              <!-- TODO demo mode -->
               <small class="text-muted">
                 Use <strong>demo</strong> / <strong>demo</strong> to login
               </small>
-            </div>
-            <div class="form-group">
-              <button type="submit" class="btn btn-primary btn-block">Login</button>
-            </div>
+            </b-form-group>
+            <b-form-group>
+              <b-button type="submit" variant="primary" block>Login</b-button>
+            </b-form-group>
             <!-- TODO
             <p class="text-center"><a href="#" class="btn">Forgot password?</a></p>
             -->
-          </form>
+          </b-form>
         </article>
       </div>
     </div>
@@ -72,6 +73,11 @@ export default Vue.extend({
         login: '',
         password: '',
       },
+      valid: {
+        login: void 0,
+        password: void 0,
+      } as { login?: boolean; password?: boolean },
+      error: '',
     };
   },
   methods: {
@@ -79,10 +85,28 @@ export default Vue.extend({
       login: authActions.login,
     }),
     submit() {
-      this.login(this.form).then(() => {
-        const back = this.$route.query.back as string;
-        this.$router.push(back || { name: 'home' });
-      });
+      this.valid = { login: void 0, password: void 0 };
+
+      const login = this.form.login.trim();
+      this.valid.login = !login ? false : void 0;
+
+      const password = this.form.password.trim();
+      this.valid.password = !password ? false : void 0;
+
+      if (!login || !password) {
+        return;
+      }
+
+      this.error = '';
+
+      return this.login({ login, password })
+        .then(() => {
+          const back = this.$route.query.back as string;
+          this.$router.push(back || { name: 'home' });
+        })
+        .catch((e) => {
+          this.error = e.status === 401 ? 'Wrong login and/or password' : 'Unexpected server error';
+        });
     },
   },
 });
