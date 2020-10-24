@@ -1,6 +1,6 @@
 import { RootState } from '~app/core/store';
 import { createActionFactory } from '~app/shared/store';
-import { authenticate } from '../domain/auth.service';
+import { authenticate } from '../domain/auth.api';
 import { loadStoredToken } from '../domain/token';
 import { authGetters, authMutations } from './index';
 import { AuthState } from './state';
