@@ -97,7 +97,7 @@ export default Vue.extend({
         return;
       }
 
-      this.error = false;
+      this.error = '';
 
       return this.login({ login, password })
         .then(() => {
