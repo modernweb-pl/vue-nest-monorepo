@@ -13,6 +13,11 @@ export class AuthController {
     return this.authService.issueToken(req.user);
   }
 
+  @Post('auth/refresh')
+  async refresh(@Request() req): Promise<AuthTokenDto> {
+    return this.authService.refreshAccessToken(req.body.refreshToken);
+  }
+
   @UseGuards(AuthGuard())
   @Get('me')
   async currentUser(@Request() req): Promise<UserDto> {

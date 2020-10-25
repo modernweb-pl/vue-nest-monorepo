@@ -8,7 +8,8 @@ export const configSchema = Joi.object({
   CORS_ORIGIN: Joi.string().default('localhost'),
 
   AUTH_SECRET: Joi.string().required(),
-  AUTH_EXPIRES_IN: Joi.alternatives(['string', 'number']).default('1d'),
+  AUTH_TOKEN_LIFETIME: Joi.alternatives(Joi.string(), Joi.number()).default('1d'),
+  AUTH_REFRESH_TOKEN_LIFETIME: Joi.alternatives(Joi.string(), Joi.number()).default('30d'),
 });
 
 export interface Config {
@@ -18,7 +19,8 @@ export interface Config {
   cors: CorsOptions;
   auth: {
     secret: string;
-    expiresIn: number | string;
+    tokenLifetime: number | string;
+    refreshTokenLifetime: number | string;
   };
 }
 
@@ -36,7 +38,8 @@ export const configFactory = (): Config => {
     },
     auth: {
       secret: process.env.AUTH_SECRET,
-      expiresIn: process.env.AUTH_EXPIRES_IN,
+      tokenLifetime: process.env.AUTH_TOKEN_LIFETIME,
+      refreshTokenLifetime: process.env.AUTH_REFRESH_TOKEN_LIFETIME,
     },
   };
 };
