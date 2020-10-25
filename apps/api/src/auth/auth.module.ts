@@ -15,7 +15,7 @@ import { AuthLocalStrategy } from './local.strategy';
       inject: [ConfigService],
       useFactory: (config: ConfigService): JwtModuleOptions => ({
         secret: config.get('auth.secret'),
-        signOptions: { expiresIn: config.get('auth.expiresIn') },
+        signOptions: { expiresIn: config.get('auth.tokenLifetime') },
       }),
     }),
     UsersModule,
