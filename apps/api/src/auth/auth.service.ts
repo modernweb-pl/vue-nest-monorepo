@@ -41,19 +41,19 @@ export class AuthService {
     };
   }
 
-  async refreshAccessToken(refresh: string): Promise<AuthTokenDto> {
-    if (!refreshTokens.includes(refresh)) {
+  async refreshAccessToken(refreshToken: string): Promise<AuthTokenDto> {
+    if (!refreshTokens.includes(refreshToken)) {
       throw new UnauthorizedException();
     }
 
     try {
-      const { login, sub } = this.jwtService.verify<JwtClaimsDto>(refresh);
+      const { login, sub } = this.jwtService.verify<JwtClaimsDto>(refreshToken);
 
       // TODO consider issuing a new refresh token and invalidating the previous one
 
       return {
         access: this.jwtService.sign({ login, sub }),
-        refresh,
+        refresh: refreshToken,
       };
     } catch (e) {
       if (e.name === 'TokenExpiredError') {
