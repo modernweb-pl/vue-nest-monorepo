@@ -105,7 +105,8 @@ export default Vue.extend({
           this.$router.push(back || { name: 'home' });
         })
         .catch((e) => {
-          this.error = e.status === 401 ? 'Wrong login and/or password' : 'Unexpected server error';
+          this.error =
+            e?.status === 401 ? 'Wrong login and/or password' : 'Unexpected server error';
         });
     },
   },

@@ -1,6 +1,4 @@
-import { RawLocation, Route } from 'vue-router';
-import { appInitializer } from '~app/core';
-import router from '~app/core/router';
+import { RawLocation, Route, RouteConfig } from 'vue-router';
 import store from '~app/core/store';
 import { authActions, authGetters } from './store';
 
@@ -10,7 +8,7 @@ export enum AuthRoute {
   PROFILE = 'auth-profile',
 }
 
-router.addRoutes([
+export const authRoutes: RouteConfig[] = [
   {
     path: '/login',
     name: AuthRoute.LOGIN,
@@ -46,15 +44,4 @@ router.addRoutes([
       authRequired: true,
     },
   },
-]);
-
-router.beforeEach((to, from, next) => {
-  appInitializer.resolve().then(() => {
-    const authRequired = to.matched.some((route) => route.meta.authRequired);
-    const loggedIn = store.getters[authGetters.loggedIn];
-
-    if (!authRequired || loggedIn) return next();
-
-    next({ name: AuthRoute.LOGIN, query: { back: to.fullPath } });
-  });
-});
+];

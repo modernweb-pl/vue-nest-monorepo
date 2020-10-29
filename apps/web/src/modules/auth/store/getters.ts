@@ -5,5 +5,7 @@ import { AuthState } from './state';
 const createGetter = createGetterFactory<AuthState, RootState>();
 
 export const getters = {
-  loggedIn: createGetter((state): boolean => !!state.token),
+  token: createGetter((state) => state.token),
+  loggedIn: createGetter((state) => !!state.token),
+  profile: createGetter((state) => state.profile),
 };

@@ -1,19 +1,13 @@
-import { AuthTokenDto } from '@app/dto';
-
-// TODO interface shared with backend
-export interface User {
-  id: number;
-  name: string;
-}
+import { AuthProfileDto, AuthTokenDto } from '@app/dto';
 
 export interface AuthState {
-  token: AuthTokenDto | null;
-  user: User | null;
+  token?: AuthTokenDto;
+  profile?: AuthProfileDto;
 }
 
 export function initialAuthState(): AuthState {
   return {
-    token: null,
-    user: null,
+    token: void 0,
+    profile: void 0,
   };
 }
