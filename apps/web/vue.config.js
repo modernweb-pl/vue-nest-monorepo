@@ -11,6 +11,8 @@ module.exports = {
 
   devServer: {
     progress: false,
+    // see https://github.com/modernweb-pl/vue-nest-monorepo/issues/10
+    hot: false,
   },
 
   chainWebpack: (config) => {
