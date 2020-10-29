@@ -3,11 +3,11 @@ const isDev = process.env.NODE_ENV !== 'production';
 
 /** @type import('@vue/cli-service').ProjectOptions */
 module.exports = {
+  outputDir: '../../dist/web',
   lintOnSave: false,
   css: {
     sourceMap: isDev,
   },
-  outputDir: '../../dist/web',
 
   devServer: {
     progress: false,

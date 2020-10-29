@@ -41,12 +41,12 @@
               </b-input-group>
             </b-form-group>
 
-            <b-form-group class="text-center">
-              <!-- TODO demo mode -->
+            <b-form-group class="text-center" v-if="$config.demoMode">
               <small class="text-muted">
                 Use <strong>demo</strong> / <strong>demo</strong> to login
               </small>
             </b-form-group>
+
             <b-form-group>
               <b-button type="submit" variant="primary" block>Login</b-button>
             </b-form-group>
@@ -70,8 +70,8 @@ export default Vue.extend({
   data() {
     return {
       form: {
-        login: '',
-        password: '',
+        login: this.$config.demoMode ? 'demo' : '',
+        password: this.$config.demoMode ? 'demo' : '',
       },
       valid: {
         login: void 0,
