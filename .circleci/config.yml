@@ -6,6 +6,8 @@ executors:
       - image: circleci/node:<<parameters.tag>>
     environment:
       NODE_ENV: "ci"
+      AUTH_SECRET: "ci-secret"
+      MONGODB_URI: "mongodb://localhost/vue-nest-monorepo"
     parameters:
       tag:
         default: lts-browsers
