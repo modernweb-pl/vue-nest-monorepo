@@ -10,6 +10,8 @@ export const configSchema = Joi.object({
   AUTH_SECRET: Joi.string().required(),
   AUTH_TOKEN_LIFETIME: Joi.alternatives(Joi.string(), Joi.number()).default('1d'),
   AUTH_REFRESH_TOKEN_LIFETIME: Joi.alternatives(Joi.string(), Joi.number()).default('30d'),
+
+  MONGODB_URI: Joi.string().required(),
 });
 
 export interface Config {
@@ -22,6 +24,7 @@ export interface Config {
     tokenLifetime: number | string;
     refreshTokenLifetime: number | string;
   };
+  mongoDbUri: string;
 }
 
 export const configFactory = (): Config => {
@@ -41,5 +44,6 @@ export const configFactory = (): Config => {
       tokenLifetime: process.env.AUTH_TOKEN_LIFETIME,
       refreshTokenLifetime: process.env.AUTH_REFRESH_TOKEN_LIFETIME,
     },
+    mongoDbUri: process.env.MONGODB_URI,
   };
 };

@@ -4,7 +4,8 @@ import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import { existsSync, readFileSync, writeFileSync } from 'fs';
 import { tmpdir } from 'os';
-import { User, UsersService } from '../users/users.service';
+import { User } from '../users/schema';
+import { UsersService } from '../users/users.service';
 
 // TODO storage
 let refreshTokens: string[] = [];
@@ -24,7 +25,7 @@ export class AuthService {
   }
 
   async validate(login: string, password: string): Promise<User> {
-    const user = await this.users.findOne(login);
+    const user = await this.users.findByLogin(login);
     if (user && password === user.password) {
       return user;
     }
