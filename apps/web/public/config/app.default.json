@@ -1,4 +1,4 @@
 {
-  "apiUrl": "http://localhost:3000",
-  "demoMode": false
+  "API_URL": "//localhost:3000",
+  "DEMO_MODE": false
 }
