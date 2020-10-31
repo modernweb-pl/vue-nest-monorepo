@@ -1,4 +1,4 @@
 export interface UserDto {
-  id: number;
+  id: string;
   login: string;
 }

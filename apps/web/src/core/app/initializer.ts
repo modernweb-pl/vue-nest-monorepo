@@ -10,7 +10,7 @@ export function InitializerFactory() {
     tasks.push(task);
   }
 
-  function resolve(): Promise<any> {
+  function resolve(): Promise<any[]> {
     if (resolved) {
       return resolved;
     }
@@ -20,10 +20,7 @@ export function InitializerFactory() {
     return resolved;
   }
 
-  return {
-    register,
-    resolve,
-  };
+  return { register, resolve };
 }
 
 export const appInitializer = InitializerFactory();

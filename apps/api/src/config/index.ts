@@ -2,7 +2,9 @@ import Joi from '@hapi/joi';
 import { CorsOptions } from '@nestjs/common/interfaces/external/cors-options.interface';
 
 export const configSchema = Joi.object({
-  NODE_ENV: Joi.string().valid('development', 'ci', 'staging', 'production').default('production'),
+  NODE_ENV: Joi.string()
+    .valid('development', 'ci', 'staging', 'production', 'demo')
+    .default('production'),
   PORT: Joi.number().port().default(3000),
   GLOBAL_PREFIX: Joi.string().default('api'),
   CORS_ORIGIN: Joi.string().default('localhost'),

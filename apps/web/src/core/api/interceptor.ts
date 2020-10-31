@@ -1,8 +1,8 @@
 import axios from 'axios';
-import { appConfig } from '~app/core';
+import { getConfig } from '../config';
 
 axios.interceptors.request.use((config) => {
-  config.baseURL = appConfig?.API_URL;
+  config.baseURL = getConfig().apiUrl;
 
   return config;
 });
