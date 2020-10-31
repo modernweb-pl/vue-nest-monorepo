@@ -6,6 +6,7 @@ executors:
       - image: circleci/node:<<parameters.tag>>
     environment:
       NODE_ENV: "ci"
+      AUTH_SECRET: "ci-secret"
     parameters:
       tag:
         default: lts-browsers
