@@ -85,13 +85,21 @@ jobs:
 workflows:
   version: 2
   verify:
+    filters:
+      branches:
+        exclude: master
     jobs:
       - lint
-      # web
       - web-test-unit
       - web-test-e2e
       - web-build
-      # api
       - api-test-unit
       - api-test-e2e
+      - api-build
+  build-and-deploy:
+    filters:
+      branches:
+        only: master
+    jobs:
+      - web-build
       - api-build
