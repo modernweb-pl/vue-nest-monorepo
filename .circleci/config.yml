@@ -120,7 +120,7 @@ workflows:
           filters: { branches: { ignore: master } }
   docker_images:
     jobs:
-      - web-docker
-#          filters: { branches: { only: master } }
-      - api-docker
-#          filters: { branches: { only: master } }
+      - web-docker:
+          filters: { branches: { only: master } }
+      - api-docker:
+          filters: { branches: { only: master } }
