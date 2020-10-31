@@ -41,11 +41,6 @@ aliases:
     install:
       cache-version: v2
 
-ignore_master: &ignore_master
-  filters:
-    branches:
-      ignore: master
-
 jobs:
   lint:
     executor: node
@@ -72,13 +67,21 @@ jobs:
   web-docker:
     executor: node
     steps:
-      - setup_remote_docker
+      - checkout
+      - setup_remote_docker:
+          version: 19.03.13
       - run: yarn web:docker
+      - run: echo "$GITHUB_TOKEN" | docker login docker.pkg.github.com -u Hagith --password-stdin
+      - run: yarn web:docker:push
   api-docker:
     executor: node
     steps:
-      - setup_remote_docker
+      - checkout
+      - setup_remote_docker:
+          version: 19.03.13
       - run: yarn api:docker
+      - run: echo "$GITHUB_TOKEN" | docker login docker.pkg.github.com -u Hagith --password-stdin
+      - run: yarn api:docker:push
 
   # api
   api-test-unit:
@@ -102,26 +105,22 @@ workflows:
   verify:
     jobs:
       - lint:
-          <<: *ignore_master
+          filters: { branches: { ignore: master } }
       - web-test-unit:
-          <<: *ignore_master
+          filters: { branches: { ignore: master } }
       - web-test-e2e:
-          <<: *ignore_master
+          filters: { branches: { ignore: master } }
       - web-build:
-          <<: *ignore_master
+          filters: { branches: { ignore: master } }
       - api-test-unit:
-          <<: *ignore_master
+          filters: { branches: { ignore: master } }
       - api-test-e2e:
-          <<: *ignore_master
+          filters: { branches: { ignore: master } }
       - api-build:
-          <<: *ignore_master
+          filters: { branches: { ignore: master } }
   docker_images:
     jobs:
-      - web-docker:
-          filters:
-            branches:
-              only: master
-      - api-docker:
-          filters:
-            branches:
-              only: master
+      - web-docker
+#          filters: { branches: { only: master } }
+      - api-docker
+#          filters: { branches: { only: master } }
