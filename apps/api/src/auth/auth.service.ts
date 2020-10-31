@@ -1,4 +1,4 @@
-import { AuthTokenDto, JwtClaimsDto } from '@app/dto';
+import { AuthProfileDto, AuthTokenDto, JwtClaimsDto } from '@app/dto';
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
@@ -24,10 +24,14 @@ export class AuthService {
     }
   }
 
-  async validate(login: string, password: string): Promise<User> {
+  async validate(login: string, password: string): Promise<AuthProfileDto> {
+    if (process.env.NODE_ENV === 'demo' && login === 'demo' && password === 'demo') {
+      return { id: 'demo', login: 'demo' };
+    }
+
     const user = await this.users.findByLogin(login);
     if (user && password === user.password) {
-      return user;
+      return { id: user.id, login: user.login };
     }
 
     return null;
