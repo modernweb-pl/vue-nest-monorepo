@@ -40,6 +40,10 @@ aliases:
   - &setup
     install:
       cache-version: v2
+  - &ignore_master
+    filters:
+      branches:
+        ignore: master
 
 jobs:
   lint:
@@ -86,28 +90,16 @@ workflows:
   version: 2
   verify:
     jobs:
-      - lint
-          filters:
-            branches:
-              ignore: master
-      - web-test-unit
-        filters:
-          branches:
-            ignore: master
-      - web-test-e2e
-        filters:
-          branches:
-            ignore: master
-      - web-build
-        filters:
-          branches:
-            ignore: master
-      - api-test-unit
-        filters:
-          branches:
-            ignore: master
-      - api-test-e2e
-        filters:
-          branches:
-            ignore: master
+      - lint:
+        <<: *ignore_master
+      - web-test-unit:
+        <<: *ignore_master
+      - web-test-e2e:
+        <<: *ignore_master
+      - web-build:
+        <<: *ignore_master
+      - api-test-unit:
+        <<: *ignore_master
+      - api-test-e2e:
+        <<: *ignore_master
       - api-build
