@@ -40,10 +40,11 @@ aliases:
   - &setup
     install:
       cache-version: v2
-  - &ignore_master
-    filters:
-      branches:
-        ignore: master
+
+ignore_master: &ignore_master
+  filters:
+    branches:
+      ignore: master
 
 jobs:
   lint:
