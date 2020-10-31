@@ -1,4 +1,4 @@
 export interface JwtClaimsDto {
-  sub: number;
+  sub: string;
   login: string;
 }
