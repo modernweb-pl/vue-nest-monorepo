@@ -69,6 +69,16 @@ jobs:
     steps:
       - *setup
       - run: yarn web build
+  web-docker:
+    executor: node
+    steps:
+      - setup_remote_docker
+      - run: yarn web:docker
+  api-docker:
+    executor: node
+    steps:
+      - setup_remote_docker
+      - run: yarn api:docker
 
   # api
   api-test-unit:
@@ -103,4 +113,15 @@ workflows:
           <<: *ignore_master
       - api-test-e2e:
           <<: *ignore_master
-      - api-build
+      - api-build:
+          <<: *ignore_master
+  docker_images:
+    jobs:
+      - web-docker:
+          filters:
+            branches:
+              only: master
+      - api-docker:
+          filters:
+            branches:
+              only: master
