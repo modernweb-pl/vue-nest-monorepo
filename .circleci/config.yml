@@ -82,24 +82,25 @@ jobs:
       - *setup
       - run: yarn api build
 
+ignore_master: &ignore_master
+  filters:
+    branches:
+      ignore: master
+
 workflows:
   version: 2
   verify:
-    filters:
-      branches:
-        exclude: master
     jobs:
       - lint
+        <<: *ignore_master
       - web-test-unit
+        <<: *ignore_master
       - web-test-e2e
+        <<: *ignore_master
       - web-build
+        <<: *ignore_master
       - api-test-unit
+        <<: *ignore_master
       - api-test-e2e
-      - api-build
-  build-and-deploy:
-    filters:
-      branches:
-        only: master
-    jobs:
-      - web-build
+        <<: *ignore_master
       - api-build
