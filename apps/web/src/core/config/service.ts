@@ -9,5 +9,5 @@ export const fetchConfig = (): Promise<Config> =>
     .catch(() => axios.get<ConfigJson>(PUBLIC_PATH + 'config/app.default.json'))
     .then(({ data }) => ({
       apiUrl: data.API_URL,
-      demoMode: !!data.DEMO_MODE,
+      demoMode: data.DEMO_MODE === '1' || data.DEMO_MODE === 'true',
     }));
