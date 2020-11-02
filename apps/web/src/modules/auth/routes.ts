@@ -1,26 +1,29 @@
-import { RawLocation, Route, RouteConfig } from 'vue-router';
+import { NavigationGuard, RawLocation, Route, RouteConfig } from 'vue-router';
 import store from '~app/core/store';
 import { authActions, authGetters } from './store';
 
 export enum AuthRoute {
   LOGIN = 'auth-login',
   LOGOUT = 'auth-logout',
+  REGISTER = 'auth-register',
   PROFILE = 'auth-profile',
 }
+
+const loggedInGuard: NavigationGuard = (to, from, next) => {
+  const loggedIn = store.getters[authGetters.loggedIn];
+  if (loggedIn) {
+    return next(from.name ? from.fullPath : { name: 'home' });
+  }
+
+  next();
+};
 
 export const authRoutes: RouteConfig[] = [
   {
     path: '/login',
     name: AuthRoute.LOGIN,
     component: () => import(/* webpackChunkName: "auth" */ './views/login.vue'),
-    beforeEnter(to, from, next) {
-      const loggedIn = store.getters[authGetters.loggedIn];
-      if (loggedIn) {
-        return next(from.name ? from.fullPath : { name: 'home' });
-      }
-
-      next();
-    },
+    beforeEnter: loggedInGuard,
   },
   {
     path: '/logout',
@@ -35,6 +38,12 @@ export const authRoutes: RouteConfig[] = [
         });
       },
     },
+  },
+  {
+    path: '/register',
+    name: AuthRoute.REGISTER,
+    component: () => import(/* webpackChunkName: "auth" */ './views/register.vue'),
+    beforeEnter: loggedInGuard,
   },
   {
     path: '/profile',

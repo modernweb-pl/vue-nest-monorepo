@@ -3,12 +3,12 @@
     <div class="col-sm-8 offset-sm-2 col-md-6 offset-md-3">
       <div class="card">
         <article class="card-body">
-          <h4 class="card-title text-center mb-4 mt-1">Sign in</h4>
-          <hr />
-
-          <p class="alert alert-danger text-center" v-if="error">{{ error }}</p>
-
           <b-form novalidate @submit.prevent="submit">
+            <h4 class="card-title text-center mb-4 mt-1">Sign in</h4>
+            <hr />
+
+            <p class="alert alert-danger text-center" v-if="error">{{ error }}</p>
+
             <b-form-group invalid-feedback="Field required" :state="valid.login">
               <b-input-group>
                 <!-- TODO
@@ -54,6 +54,13 @@
             <p class="text-center"><a href="#" class="btn">Forgot password?</a></p>
             -->
           </b-form>
+
+          <div class="text-center">
+            <p>Don't have an account?</p>
+            <b-button variant="outline-primary" :to="{ name: authRoute.REGISTER }"
+              >Create account
+            </b-button>
+          </div>
         </article>
       </div>
     </div>
@@ -63,12 +70,14 @@
 <script lang="ts">
 import Vue from 'vue';
 import { mapActions } from 'vuex';
+import { AuthRoute } from '../routes';
 import { authActions } from '../store';
 
 export default Vue.extend({
   name: 'auth-login',
   data() {
     return {
+      authRoute: AuthRoute,
       form: {
         login: this.$config.demoMode ? 'demo' : '',
         password: this.$config.demoMode ? 'demo' : '',
