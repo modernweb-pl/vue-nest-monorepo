@@ -7,6 +7,7 @@ executors:
     environment:
       NODE_ENV: "ci"
       AUTH_SECRET: "ci-secret"
+      DEBUG: "MongoMS:*"
     parameters:
       tag:
         default: lts-browsers
