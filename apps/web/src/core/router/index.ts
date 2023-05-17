@@ -49,12 +49,12 @@ router.beforeResolve(async (routeTo, routeFrom, next) => {
               next(...args);
               reject(new Error('Redirected'));
             } else {
-              resolve();
+              resolve(void 0);
             }
           });
         } else {
           // Otherwise, continue resolving the route.
-          resolve();
+          resolve(void 0);
         }
       });
     }
