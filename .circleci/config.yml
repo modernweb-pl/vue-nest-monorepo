@@ -9,7 +9,7 @@ executors:
       AUTH_SECRET: "ci-secret"
     parameters:
       tag:
-        default: lts-browsers
+        default: 16-browsers
         description: |
           Pick a specific circleci/node image variant: https://hub.docker.com/r/circleci/node/tags
         type: string

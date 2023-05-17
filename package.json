@@ -20,10 +20,13 @@
     "web:docker": "docker build . -t docker.pkg.github.com/modernweb-pl/vue-nest-monorepo/web -f apps/web/Dockerfile",
     "web:docker:push": "docker push docker.pkg.github.com/modernweb-pl/vue-nest-monorepo/web",
     "build": "concurrently -n \"api,web\" \"yarn api build\" \"yarn web build\"",
-    "start": "concurrently -k \"yarn api start:dev\" \"yarn web serve\"",
+    "dev": "concurrently -k \"yarn api start:dev\" \"yarn web serve\"",
     "bootstrap": "lerna bootstrap",
     "format": "yarn lint --fix && prettier --write **/*.{html,scss,json}",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx,.vue"
+  },
+  "engines": {
+    "node": ">=16"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "~2.23.0",
