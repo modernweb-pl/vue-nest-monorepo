@@ -3,13 +3,13 @@ version: 2.1
 executors:
   node:
     docker:
-      - image: circleci/node:<<parameters.tag>>
+      - image: cimg/node:<<parameters.tag>>
     environment:
       NODE_ENV: "ci"
       AUTH_SECRET: "ci-secret"
     parameters:
       tag:
-        default: 16-browsers
+        default: 16.20-browsers
         description: |
           Pick a specific circleci/node image variant: https://hub.docker.com/r/circleci/node/tags
         type: string
