@@ -3,15 +3,15 @@ version: 2.1
 executors:
   node:
     docker:
-      - image: circleci/node:<<parameters.tag>>
+      - image: cimg/node:<<parameters.tag>>
     environment:
       NODE_ENV: "ci"
       AUTH_SECRET: "ci-secret"
     parameters:
       tag:
-        default: 16-browsers
+        default: 16.20-browsers
         description: |
-          Pick a specific circleci/node image variant: https://hub.docker.com/r/circleci/node/tags
+          Pick a specific circleci/node image variant: https://hub.docker.com/r/cimg/node/tags
         type: string
 
 commands:
@@ -29,6 +29,8 @@ commands:
             - node-deps-<<parameters.cache-version>>-{{ checksum "yarn.lock"}}
             - node-deps-<<parameters.cache-version>>-
             - node-deps-
+      - run: wget http://archive.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.1f-1ubuntu2_amd64.deb
+      - run: sudo dpkg -i libssl1.1_1.1.1f-1ubuntu2_amd64.deb
       - run: yarn --frozen-lockfile
       - save_cache:
           key: node-deps-<<parameters.cache-version>>-{{ checksum "yarn.lock"}}
