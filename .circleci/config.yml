@@ -41,7 +41,7 @@ commands:
 aliases:
   - &setup
     install:
-      cache-version: v2
+      cache-version: v3
 
 jobs:
   lint:
@@ -119,6 +119,10 @@ workflows:
       - api-test-e2e:
           filters: { branches: { ignore: master } }
       - api-build:
+          filters: { branches: { ignore: master } }
+      - web-docker:
+          filters: { branches: { ignore: master } }
+      - api-docker:
           filters: { branches: { ignore: master } }
   docker_images:
     jobs:
