@@ -15,7 +15,7 @@ RUN yarn api build
 
 ### Production image
 
-FROM node:lts-slim as app
+FROM node:16-slim as app
 
 WORKDIR /app
 ENV NODE_ENV production
