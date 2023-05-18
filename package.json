@@ -24,7 +24,7 @@
     "bootstrap": "lerna bootstrap",
     "format": "yarn lint --fix && prettier --write **/*.{html,scss,json}",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx,.vue",
-    "test": "concurrently -k 'yarn api test' 'yarn web test'"
+    "test": "concurrently 'yarn api test' 'yarn web test'"
   },
   "engines": {
     "node": ">=16"
