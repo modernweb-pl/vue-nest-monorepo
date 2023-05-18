@@ -41,6 +41,7 @@
     "@nestjs/schematics": "^9.0.0",
     "@nestjs/testing": "^9.0.0",
     "@shelf/jest-mongodb": "^4.1.7",
+    "@types/express-serve-static-core": "^4.17.35",
     "@types/jest": "^29.5.1",
     "@types/passport-jwt": "^3.0.8",
     "@types/passport-local": "^1.0.35",
