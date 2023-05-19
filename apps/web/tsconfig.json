@@ -1,17 +1,14 @@
 {
-  "extends": "../../tsconfig.json",
-  "compilerOptions": {
-    "target": "esnext",
-    "module": "esnext",
-    "strict": true,
-    "jsx": "preserve",
-    "importHelpers": true,
-    "baseUrl": ".",
-    "types": ["webpack-env", "jest"],
-    "paths": {
-      "~app/*": ["src/*"]
+  "files": [],
+  "references": [
+    {
+      "path": "./tsconfig.config.json"
     },
-    "lib": ["esnext", "dom", "dom.iterable", "scripthost"]
-  },
-  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue", "tests/**/*.ts", "tests/**/*.tsx"]
+    {
+      "path": "./tsconfig.app.json"
+    },
+    {
+      "path": "./tsconfig.vitest.json"
+    }
+  ]
 }

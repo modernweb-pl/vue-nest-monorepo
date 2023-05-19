@@ -1,10 +1,11 @@
-import { Module } from 'vuex';
-import { RootState } from '~app/core/store';
+import type { Module } from 'vuex';
+import type { RootState } from '~app/core/store';
 import { createActionMap, createGetterMap, createMutationMap } from '~app/shared/store';
 import { actions } from './actions';
 import { getters } from './getters';
 import { mutations } from './mutations';
-import { AuthState, initialAuthState } from './state';
+import type { AuthState } from './state';
+import { initialAuthState } from './state';
 
 export const authStore: Module<AuthState, RootState> = {
   namespaced: true,

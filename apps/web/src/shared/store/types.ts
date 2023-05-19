@@ -1,4 +1,4 @@
-import { Action, ActionTree, Getter, GetterTree, Mutation, MutationTree } from 'vuex';
+import type { Action, ActionTree, Getter, GetterTree, Mutation, MutationTree } from 'vuex';
 
 /**
  * Set of helpers to handle Vuex more "typed" way.

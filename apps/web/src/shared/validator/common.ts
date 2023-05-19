@@ -1,4 +1,4 @@
-import { Validator, ValidatorParams } from './types';
+import type { Validator, ValidatorParams } from './types';
 
 export function isEmpty(value: any): boolean {
   if (!value) {

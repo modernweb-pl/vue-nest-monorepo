@@ -1,4 +1,4 @@
-import { PluginFunction } from 'vue';
+import type { PluginFunction } from 'vue';
 import store from '../store';
 import { ConfigStoreGetters, NAMESPACE } from './store';
 

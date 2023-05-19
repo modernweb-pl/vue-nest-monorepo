@@ -1,4 +1,4 @@
-import { AuthTokenDto } from '@app/dto';
+import type { AuthTokenDto } from '@app/dto';
 
 export const TOKEN_STORAGE_KEY = 'auth_token';
 

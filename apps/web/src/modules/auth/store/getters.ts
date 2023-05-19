@@ -1,6 +1,6 @@
-import { RootState } from '~app/core/store';
+import type { RootState } from '~app/core/store';
 import { createGetterFactory } from '~app/shared/store';
-import { AuthState } from './state';
+import type { AuthState } from './state';
 
 const createGetter = createGetterFactory<AuthState, RootState>();
 

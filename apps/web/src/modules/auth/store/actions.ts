@@ -1,10 +1,10 @@
-import { AxiosError } from 'axios';
-import { RootState } from '~app/core/store';
+import type { AxiosError } from 'axios';
+import type { RootState } from '~app/core/store';
 import { createActionFactory } from '~app/shared/store';
 import { authenticate, fetchAuthProfile, refreshToken } from '../service/auth.api';
 import { loadStoredToken, storeToken } from '../service/token.storage';
 import { authMutations } from './index';
-import { AuthState } from './state';
+import type { AuthState } from './state';
 
 export interface LoginPayload {
   login: string;

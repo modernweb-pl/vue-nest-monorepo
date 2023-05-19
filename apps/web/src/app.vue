@@ -13,9 +13,9 @@ import Vue from 'vue';
 import { appInitializer } from '~app/core';
 import { AppSplash } from '~app/layout';
 
-import './shared/bootstrap-vue';
 import './layout';
 import './modules';
+import './shared/bootstrap-vue';
 
 const DEFAULT_LAYOUT = 'default';
 
@@ -30,7 +30,7 @@ export default Vue.extend({
   },
   computed: {
     layout() {
-      return 'layout-' + (this.$route.meta.layout || DEFAULT_LAYOUT);
+      return 'layout-' + (this.$route.meta?.layout || DEFAULT_LAYOUT);
     },
   },
 

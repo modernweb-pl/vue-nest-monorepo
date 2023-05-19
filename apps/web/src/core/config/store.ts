@@ -1,7 +1,7 @@
-import { Module } from 'vuex';
-import { RootState } from '../store';
+import type { Module } from 'vuex';
+import type { RootState } from '../store';
 import { fetchConfig } from './service';
-import { ConfigState } from './types';
+import type { ConfigState } from './types';
 
 export const NAMESPACE = 'config';
 
