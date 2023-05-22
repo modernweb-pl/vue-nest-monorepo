@@ -1,17 +1,19 @@
 FROM node:16 as builder
 
+RUN npm install -g pnpm
+
 WORKDIR /app
 
-COPY package.json yarn.lock ./
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 COPY apps/web/package.json apps/web/
 COPY libs/dto/package.json libs/dto/
-RUN yarn --frozen-lockfile
+RUN pnpm install --frozen-lockfile
 
 COPY tsconfig.json .
 COPY apps/web apps/web
 COPY libs libs
 
-RUN yarn web build
+RUN pnpm web build
 
 ### Production image
 

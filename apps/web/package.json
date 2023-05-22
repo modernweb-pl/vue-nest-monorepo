@@ -6,15 +6,14 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "build": "concurrently 'yarn type-check' 'yarn build-only'",
+    "build": "concurrently 'pnpm type-check' 'pnpm build-only'",
     "build-only": "vite build",
     "dev": "vite",
-    "prepreview": "vite build",
-    "preview": "vite preview --port 4173",
+    "preview": "vite build && vite preview --port 4173",
     "test": "vitest run --environment jsdom",
     "test:watch": "vitest --environment jsdom",
-    "test:e2e": "start-server-and-test 'yarn preview' http://localhost:4173/ 'cypress run --e2e'",
-    "test:e2e:gui": "start-server-and-test 'yarn preview' http://localhost:4173/ 'cypress open --e2e'",
+    "test:e2e": "start-server-and-test 'pnpm preview' http://localhost:4173/ 'cypress run --e2e'",
+    "test:e2e:gui": "start-server-and-test 'pnpm preview' http://localhost:4173/ 'cypress open --e2e'",
     "type-check": "vue-tsc --noEmit -p tsconfig.vitest.json --composite false"
   },
   "dependencies": {
@@ -48,10 +47,5 @@
     "vitest": "^0.31.1",
     "vue-template-compiler": "^2.7.14",
     "vue-tsc": "^0.38.8"
-  },
-  "workspaces": {
-    "nohoist": [
-      "@types/jsdom"
-    ]
   }
 }

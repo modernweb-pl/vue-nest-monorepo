@@ -3,25 +3,19 @@
   "private": true,
   "repository": "git@github.com:modernweb-pl/vue-nest-monorepo.git",
   "author": "ModernWeb <biuro@modernweb.pl>",
-  "workspaces": {
-    "packages": [
-      "apps/*",
-      "libs/*"
-    ]
-  },
   "scripts": {
-    "api": "yarn workspace @app/api",
+    "api": "pnpm -F @app/api",
     "api:docker": "docker build . -t docker.pkg.github.com/modernweb-pl/vue-nest-monorepo/api -f apps/api/Dockerfile",
     "api:docker:push": "docker push docker.pkg.github.com/modernweb-pl/vue-nest-monorepo/api",
-    "web": "yarn workspace @app/web",
+    "web": "pnpm -F @app/web",
     "web:docker": "docker build . -t docker.pkg.github.com/modernweb-pl/vue-nest-monorepo/web -f apps/web/Dockerfile",
     "web:docker:push": "docker push docker.pkg.github.com/modernweb-pl/vue-nest-monorepo/web",
-    "build": "concurrently -n 'api,web' 'yarn api build' 'yarn web build'",
-    "dev": "concurrently -k 'yarn api dev' 'yarn web dev'",
+    "build": "concurrently -n 'api,web' 'pnpm api build' 'pnpm web build'",
+    "dev": "concurrently -k 'pnpm api dev' 'pnpm web dev'",
     "bootstrap": "lerna bootstrap",
-    "format": "yarn lint --fix && prettier --write **/*.{html,scss,json}",
+    "format": "pnpm lint --fix && prettier --write **/*.{html,scss,json}",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx,.vue,.cjs,.mjs",
-    "test": "concurrently -n 'api,web' 'yarn api test' 'yarn web test'"
+    "test": "concurrently -n 'api,web' 'pnpm api test' 'pnpm web test'"
   },
   "engines": {
     "node": ">=16"
