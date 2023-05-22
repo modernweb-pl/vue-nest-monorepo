@@ -26,13 +26,13 @@ commands:
       - checkout
       - restore_cache:
           keys:
-            - node-deps-<<parameters.cache-version>>-{{ checksum "yarn.lock"}}
+            - node-deps-<<parameters.cache-version>>-{{ checksum "pnpm-lock.yaml"}}
             - node-deps-<<parameters.cache-version>>-
       - run: wget http://archive.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.1f-1ubuntu2_amd64.deb
       - run: sudo dpkg -i libssl1.1_1.1.1f-1ubuntu2_amd64.deb
-      - run: yarn --frozen-lockfile
+      - run: pnpm install --frozen-lockfile
       - save_cache:
-          key: node-deps-<<parameters.cache-version>>-{{ checksum "yarn.lock"}}
+          key: node-deps-<<parameters.cache-version>>-{{ checksum "pnpm-lock.yaml"}}
           paths:
             - node_modules
             - ~/.cache
@@ -47,73 +47,73 @@ jobs:
     executor: node
     steps:
       - *setup
-      - run: yarn lint
+      - run: pnpm lint
 
   # web
   web-test-unit:
     executor: node
     steps:
       - *setup
-      - run: yarn web test
+      - run: pnpm web test
   web-test-e2e:
     executor: node
     steps:
       - *setup
-      - run: yarn web test:e2e
+      - run: pnpm web test:e2e
   web-build:
     executor: node
     steps:
       - *setup
-      - run: yarn web build
+      - run: pnpm web build
   web-docker-build:
     executor: node
     steps:
       - checkout
       - setup_remote_docker:
           version: 19.03.13
-      - run: yarn web:docker
+      - run: pnpm web:docker
   web-docker-publish:
     executor: node
     steps:
       - checkout
       - setup_remote_docker:
           version: 19.03.13
-      - run: yarn web:docker
+      - run: pnpm api:docker
       - run: echo "$GITHUB_TOKEN" | docker login docker.pkg.github.com -u Hagith --password-stdin
-      - run: yarn web:docker:push
+      - run: pnpm api:docker:push
 
   # api
   api-test-unit:
     executor: node
     steps:
       - *setup
-      - run: yarn api test
+      - run: pnpm api test
   api-test-e2e:
     executor: node
     steps:
       - *setup
-      - run: yarn api test:e2e
+      - run: pnpm api test:e2e
   api-build:
     executor: node
     steps:
       - *setup
-      - run: yarn api build
+      - run: pnpm api build
   api-docker-build:
     executor: node
     steps:
       - checkout
       - setup_remote_docker:
           version: 19.03.13
-      - run: yarn api:docker
+      - run: pnpm api:docker
   api-docker-publish:
     executor: node
     steps:
       - checkout
       - setup_remote_docker:
           version: 19.03.13
-      - run: yarn api:docker
+      - run: pnpm api:docker
       - run: echo "$GITHUB_TOKEN" | docker login docker.pkg.github.com -u Hagith --password-stdin
-      - run: yarn api:docker:push
+      - run: pnpm api:docker:push
 
 workflows:
   version: 2
