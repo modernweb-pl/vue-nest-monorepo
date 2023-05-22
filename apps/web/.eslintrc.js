@@ -11,5 +11,9 @@ module.exports = {
         jest: true,
       },
     },
+    {
+      files: ['tests/e2e/specs/**.{cy,spec}.{js,ts,jsx,tsx}'],
+      extends: ['plugin:cypress/recommended'],
+    },
   ],
 };

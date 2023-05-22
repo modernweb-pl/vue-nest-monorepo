@@ -10,4 +10,4 @@ export interface Config {
 
 export type ConfigState = Config;
 
-export const PUBLIC_PATH = process.env.BASE_URL;
+export const PUBLIC_PATH = import.meta.env.BASE_URL;

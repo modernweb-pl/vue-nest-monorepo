@@ -4,11 +4,11 @@
 // mixins to be imported first
 
 // Include variables and utilities first
-@import '~bootstrap-vue/src/utilities';
+@import 'bootstrap-vue/src/utilities';
 
 // Include custom SCSS for components
-@import '~bootstrap-vue/src/components/index';
+@import 'bootstrap-vue/src/components/index';
 
 // Include custom SCSS for icons
 // Temporary until Bootstrap v5 (maybe)
-@import '~bootstrap-vue/src/icons/index';
+@import 'bootstrap-vue/src/icons/index';

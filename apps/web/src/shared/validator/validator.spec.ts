@@ -1,3 +1,4 @@
+import { describe, expect, it } from 'vitest';
 import { required } from './required';
 import { sameAs } from './same-as';
 

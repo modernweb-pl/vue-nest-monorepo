@@ -1,9 +1,10 @@
 import Vue from 'vue';
-import { appInitializer, InitializerTask } from '../app/initializer';
+import type { InitializerTask } from '../app/initializer';
+import { appInitializer } from '../app/initializer';
 import store from '../store';
 import { ConfigPlugin } from './plugin';
 import { configStore, ConfigStoreAction, ConfigStoreGetters, NAMESPACE } from './store';
-import { Config } from './types';
+import type { Config } from './types';
 
 Vue.use(ConfigPlugin);
 

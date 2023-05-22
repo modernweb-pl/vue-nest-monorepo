@@ -1,5 +1,6 @@
 import axios from 'axios';
-import { Config, ConfigJson, PUBLIC_PATH } from './types';
+import type { Config, ConfigJson } from './types';
+import { PUBLIC_PATH } from './types';
 
 export const fetchConfig = (): Promise<Config> =>
   axios

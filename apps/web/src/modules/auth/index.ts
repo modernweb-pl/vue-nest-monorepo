@@ -1,4 +1,4 @@
-import { AuthTokenDto } from '@app/dto';
+import type { AuthTokenDto } from '@app/dto';
 import axios from 'axios';
 import { appInitializer } from '~app/core';
 import router from '~app/core/router';

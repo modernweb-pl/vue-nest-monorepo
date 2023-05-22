@@ -1,4 +1,4 @@
-import { AuthProfileDto, AuthTokenDto } from '@app/dto';
+import type { AuthProfileDto, AuthTokenDto } from '@app/dto';
 
 export interface AuthState {
   token?: AuthTokenDto;

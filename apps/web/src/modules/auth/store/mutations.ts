@@ -1,6 +1,6 @@
-import { AuthProfileDto, AuthTokenDto } from '@app/dto';
+import type { AuthProfileDto, AuthTokenDto } from '@app/dto';
 import { createMutationFactory } from '~app/shared/store';
-import { AuthState } from './state';
+import type { AuthState } from './state';
 
 const createMutation = createMutationFactory<AuthState>();
 

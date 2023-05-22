@@ -29,6 +29,7 @@ import { AuthRoute } from '~app/modules/auth/routes';
 import { authGetters } from '~app/modules/auth/store';
 
 export default Vue.extend({
+  name: 'layout-header',
   data() {
     return {
       routes: {

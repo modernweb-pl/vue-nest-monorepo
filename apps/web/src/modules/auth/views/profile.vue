@@ -7,7 +7,7 @@
 </template>
 
 <script lang="ts">
-import { AuthProfileDto } from '@app/dto';
+import type { AuthProfileDto } from '@app/dto';
 import Vue from 'vue';
 import { mapActions, mapGetters } from 'vuex';
 import { authActions, authGetters } from '../store';
