@@ -1,5 +1,9 @@
 lockfileVersion: '6.0'
 
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
 importers:
 
   .:
@@ -100,7 +104,7 @@ importers:
         version: 9.4.1(@nestjs/common@9.4.1)(@nestjs/core@9.4.1)(@nestjs/platform-express@9.4.1)
       '@shelf/jest-mongodb':
         specifier: ^4.1.7
-        version: 4.1.7(jest-environment-node@29.5.0)(mongodb@5.5.0)
+        version: 4.1.7(jest-environment-node@29.5.0)(mongodb@5.6.0)
       '@types/express':
         specifier: ^4.17.17
         version: 4.17.17
@@ -4071,7 +4075,7 @@ packages:
       - zenObservable
     dev: true
 
-  /@shelf/jest-mongodb@4.1.7(jest-environment-node@29.5.0)(mongodb@5.5.0):
+  /@shelf/jest-mongodb@4.1.7(jest-environment-node@29.5.0)(mongodb@5.6.0):
     resolution: {integrity: sha512-1sQXHmEirGL+apuOGEt6dkySsgq5SmIGj7uKWYZ6VWch7kg7imCn4CrbfHgotRoiS6QRRIIVBfMdpv7g3XoEMg==}
     engines: {node: '>=16'}
     peerDependencies:
@@ -4080,7 +4084,7 @@ packages:
     dependencies:
       debug: 4.3.4(supports-color@8.1.1)
       jest-environment-node: 29.5.0
-      mongodb: 5.5.0
+      mongodb: 5.6.0
       mongodb-memory-server: 8.11.5
     transitivePeerDependencies:
       - aws-crt
@@ -10932,8 +10936,8 @@ packages:
       saslprep: 1.0.3
     dev: false
 
-  /mongodb@5.5.0:
-    resolution: {integrity: sha512-XgrkUgAAdfnZKQfk5AsYL8j7O99WHd4YXPxYxnh8dZxD+ekYWFRA3JktUsBnfg+455Smf75/+asoU/YLwNGoQQ==}
+  /mongodb@5.6.0:
+    resolution: {integrity: sha512-z8qVs9NfobHJm6uzK56XBZF8XwM9H294iRnB7wNjF0SnY93si5HPziIJn+qqvUR5QOff/4L0gCD6SShdR/GtVQ==}
     engines: {node: '>=14.20.1'}
     peerDependencies:
       '@aws-sdk/credential-providers': ^3.201.0
