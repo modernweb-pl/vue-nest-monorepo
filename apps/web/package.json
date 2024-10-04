@@ -17,7 +17,7 @@
     "type-check": "vue-tsc --noEmit -p tsconfig.vitest.json --composite false"
   },
   "dependencies": {
-    "@app/dto": "^0.0.1",
+    "@app/dto": "workspace:*",
     "axios": "^1.4.0",
     "bootstrap": "^4.6.2",
     "bootstrap-vue": "^2.23.1",
