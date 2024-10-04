@@ -1,6 +1,7 @@
 .git
 node_modules
 dist
+scripts
 **/Dockerfile
 docker-compose*
 .dockerignore

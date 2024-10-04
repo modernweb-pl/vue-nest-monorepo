@@ -1,23 +1,31 @@
-version: '3.7'
-
 services:
   web:
     build:
       context: .
-      dockerfile: apps/web/Dockerfile
+      target: web
     environment:
-      - API_URL=http://localhost:3000/api
-      - CONFIG_VARS=API_URL
+      - CONFIG_VARS=API_URL,DEMO_MODE
+      - API_URL=http://localhost:3000
+      - DEMO_MODE=true
     ports:
-      - 8080:80
+      - "8080:80"
     tty: true
 
   api:
     build:
       context: .
-      dockerfile: apps/api/Dockerfile
+      target: api
     environment:
       - AUTH_SECRET=ThisIsNotASecretKeyJustForTesting
+      - MONGO_URL=mongodb://mongo/vue-nest-monorepo
+      - NODE_ENV=demo
     ports:
-      - 3000:3000
+      - "3000:3000"
     tty: true
+
+  mongo:
+    image: mongo:8
+    ports:
+      - "27017:27017"
+    volumes:
+      - .data/mongo:/var/lib/mysql

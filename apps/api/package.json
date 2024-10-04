@@ -11,6 +11,8 @@
     "start": "nest start",
     "preview": "node ../../dist/api/main",
     "build": "nest build",
+    "docker:build": "node ../../scripts/docker build api",
+    "docker:push": "node ../../scripts/docker push api",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
