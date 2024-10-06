@@ -1,0 +1,20 @@
+name: '🔒 setup'
+description: 'Setup Node, pnpm & install dependencies'
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Install pnpm
+      uses: pnpm/action-setup@v4
+      with:
+        run_install: false
+
+    - name: Install Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version-file: package.json
+        cache: pnpm
+
+    - name: Install dependencies
+      shell: bash
+      run: pnpm install

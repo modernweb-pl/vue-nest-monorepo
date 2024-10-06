@@ -1,6 +1,10 @@
 {
-  "packages": ["apps/*", "libs/*"],
+  "$schema": "node_modules/@lerna-lite/cli/schemas/lerna-schema.json",
+  "packages": [
+    "apps/*",
+    "libs/*"
+  ],
   "npmClient": "pnpm",
-  "useWorkspaces": true,
-  "version": "0.0.0"
+  "version": "0.0.0",
+  "conventionalCommits": true
 }

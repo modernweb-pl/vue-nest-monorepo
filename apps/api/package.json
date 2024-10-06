@@ -7,9 +7,8 @@
   "private": true,
   "scripts": {
     "build": "nest build",
-    "dev": "nest start --watch",
+    "dev": "nest start --watch --preserveWatchOutput",
     "start": "nest start",
-    "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node ../../dist/api/main",
     "test": "jest",
@@ -20,7 +19,7 @@
     "test:e2e:watch": "jest --config ./test/jest-e2e.json --watch"
   },
   "dependencies": {
-    "@app/dto": "^0.0.1",
+    "@app/dto": "workspace:*",
     "@nestjs/common": "^9.4.1",
     "@nestjs/config": "^2.3.2",
     "@nestjs/core": "^9.4.1",

@@ -1,36 +1,42 @@
 {
-  "name": "root",
+  "name": "vue-nest-monorepo",
   "private": true,
   "repository": "git@github.com:modernweb-pl/vue-nest-monorepo.git",
   "author": "ModernWeb <biuro@modernweb.pl>",
+  "packageManager": "pnpm@9.10.0",
+  "engineStrict": true,
+  "engines": {
+    "node": ">=20",
+    "pnpm": ">=9.10"
+  },
   "scripts": {
+    "dev": "pnpm -r --parallel dev",
     "api": "pnpm -F @app/api",
     "api:docker": "docker build . -t docker.pkg.github.com/modernweb-pl/vue-nest-monorepo/api -f apps/api/Dockerfile",
     "api:docker:push": "docker push docker.pkg.github.com/modernweb-pl/vue-nest-monorepo/api",
     "web": "pnpm -F @app/web",
     "web:docker": "docker build . -t docker.pkg.github.com/modernweb-pl/vue-nest-monorepo/web -f apps/web/Dockerfile",
     "web:docker:push": "docker push docker.pkg.github.com/modernweb-pl/vue-nest-monorepo/web",
-    "build": "concurrently -n 'api,web' 'pnpm api build' 'pnpm web build'",
-    "dev": "concurrently -k 'pnpm api dev' 'pnpm web dev'",
-    "bootstrap": "lerna bootstrap",
+    "build": "pnpm -r --parallel build",
+    "clean": "rimraf --glob dist node_modules apps/*/node_modules",
     "format": "pnpm lint --fix && prettier --write **/*.{html,scss,json}",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx,.vue,.cjs,.mjs",
-    "test": "concurrently -n 'api,web' 'pnpm api test' 'pnpm web test'"
-  },
-  "engines": {
-    "node": ">=16"
+    "test": "pnpm -r --parallel test",
+    "bump": "lerna version --sync-workspace-lock"
   },
   "devDependencies": {
-    "@types/node": "^16.18.32",
+    "@lerna-lite/cli": "^3.9.2",
+    "@lerna-lite/version": "^3.9.2",
+    "@types/node": "^20.16.10",
     "@typescript-eslint/eslint-plugin": "^5.59.6",
     "@typescript-eslint/parser": "^5.59.6",
     "concurrently": "^5.3.0",
     "eslint": "^8.41.0",
     "eslint-config-prettier": "^7.2.0",
     "eslint-plugin-prettier": "^3.4.1",
-    "lerna": "~3.20.2",
     "lint-staged": "~10.0.10",
     "prettier": "~2.0.5",
+    "rimraf": "^6.0.1",
     "typescript": "^4.9.5",
     "yorkie": "~2.0.0"
   },
