@@ -10,19 +10,19 @@
     "pnpm": ">=9.10"
   },
   "scripts": {
-    "dev": "pnpm -r --parallel run dev",
+    "dev": "pnpm -r --parallel dev",
     "api": "pnpm -F @app/api",
     "api:docker": "docker build . -t docker.pkg.github.com/modernweb-pl/vue-nest-monorepo/api -f apps/api/Dockerfile",
     "api:docker:push": "docker push docker.pkg.github.com/modernweb-pl/vue-nest-monorepo/api",
     "web": "pnpm -F @app/web",
     "web:docker": "docker build . -t docker.pkg.github.com/modernweb-pl/vue-nest-monorepo/web -f apps/web/Dockerfile",
     "web:docker:push": "docker push docker.pkg.github.com/modernweb-pl/vue-nest-monorepo/web",
-    "build": "concurrently -n 'api,web' 'pnpm api build' 'pnpm web build'",
+    "build": "pnpm -r --parallel build",
     "clean": "rimraf --glob dist node_modules apps/*/node_modules",
     "bootstrap": "lerna bootstrap",
     "format": "pnpm lint --fix && prettier --write **/*.{html,scss,json}",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx,.vue,.cjs,.mjs",
-    "test": "concurrently -n 'api,web' 'pnpm api test' 'pnpm web test'"
+    "test": "pnpm -r --parallel test"
   },
   "devDependencies": {
     "@types/node": "^20.16.10",
