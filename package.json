@@ -1,5 +1,5 @@
 {
-  "name": "root",
+  "name": "vue-nest-monorepo",
   "private": true,
   "repository": "git@github.com:modernweb-pl/vue-nest-monorepo.git",
   "author": "ModernWeb <biuro@modernweb.pl>",
@@ -19,12 +19,14 @@
     "web:docker:push": "docker push docker.pkg.github.com/modernweb-pl/vue-nest-monorepo/web",
     "build": "pnpm -r --parallel build",
     "clean": "rimraf --glob dist node_modules apps/*/node_modules",
-    "bootstrap": "lerna bootstrap",
     "format": "pnpm lint --fix && prettier --write **/*.{html,scss,json}",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx,.vue,.cjs,.mjs",
-    "test": "pnpm -r --parallel test"
+    "test": "pnpm -r --parallel test",
+    "bump": "lerna version --sync-workspace-lock"
   },
   "devDependencies": {
+    "@lerna-lite/cli": "^3.9.2",
+    "@lerna-lite/version": "^3.9.2",
     "@types/node": "^20.16.10",
     "@typescript-eslint/eslint-plugin": "^5.59.6",
     "@typescript-eslint/parser": "^5.59.6",
@@ -32,7 +34,6 @@
     "eslint": "^8.41.0",
     "eslint-config-prettier": "^7.2.0",
     "eslint-plugin-prettier": "^3.4.1",
-    "lerna": "~3.20.2",
     "lint-staged": "~10.0.10",
     "prettier": "~2.0.5",
     "rimraf": "^6.0.1",
