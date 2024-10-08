@@ -1,7 +1,9 @@
-# [Vue.js](https://vuejs.org/) + [NestJS](https://nestjs.com/) Monorepo
+# [Vue.js](https://vuejs.org/) + [NestJS](https://nestjs.com/) [Monorepo](https://monorepo.tools/)
 
-[![CircleCI](https://circleci.com/gh/modernweb-pl/vue-nest-monorepo/tree/master.svg?style=svg)](https://circleci.com/gh/modernweb-pl/workflows/vue-nest-monorepo/tree/master)
-
+![Dynamic JSON Badge](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fmodernweb-pl%2Fvue-nest-monorepo%2Frefs%2Fheads%2Fmaster%2Fapps%2Fweb%2Fpackage.json&query=%24.dependencies.vue&logo=vuedotjs&logoColor=%234FC08D&label=Vue.js&color=%234FC08D)
+![Dynamic JSON Badge](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fmodernweb-pl%2Fvue-nest-monorepo%2Frefs%2Fheads%2Fmaster%2Fapps%2Fapi%2Fpackage.json&query=%24.dependencies.%40nestjs%2Fcore&logo=nestjs&logoColor=%23E0234E&label=NestJS&color=%23E0234E)
+![Dynamic JSON Badge](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fmodernweb-pl%2Fvue-nest-monorepo%2Frefs%2Fheads%2Fmaster%2Fpackage.json&query=%24.devDependencies.typescript&logo=typescript&logoColor=%233178C6&label=TypeScript&color=%233178C6)
+![Dynamic JSON Badge](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fmodernweb-pl%2Fvue-nest-monorepo%2Frefs%2Fheads%2Fmaster%2Fpackage.json&query=%24.engines.node&logo=nodedotjs&logoColor=%235FA04E&label=Node.js&color=%235FA04E)
 
 ## Docker support
 
