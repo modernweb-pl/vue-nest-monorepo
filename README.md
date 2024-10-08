@@ -4,6 +4,7 @@
 ![Dynamic JSON Badge](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fmodernweb-pl%2Fvue-nest-monorepo%2Frefs%2Fheads%2Fmaster%2Fapps%2Fapi%2Fpackage.json&query=%24.dependencies.%40nestjs%2Fcore&logo=nestjs&logoColor=%23E0234E&label=NestJS&color=%23E0234E)
 ![Dynamic JSON Badge](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fmodernweb-pl%2Fvue-nest-monorepo%2Frefs%2Fheads%2Fmaster%2Fpackage.json&query=%24.devDependencies.typescript&logo=typescript&logoColor=%233178C6&label=TypeScript&color=%233178C6)
 ![Dynamic JSON Badge](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fmodernweb-pl%2Fvue-nest-monorepo%2Frefs%2Fheads%2Fmaster%2Fpackage.json&query=%24.engines.node&logo=nodedotjs&logoColor=%235FA04E&label=Node.js&color=%235FA04E)
+[![Verify](https://github.com/modernweb-pl/vue-nest-monorepo/actions/workflows/verify.yml/badge.svg?branch=master&event=push)](https://github.com/modernweb-pl/vue-nest-monorepo/actions/workflows/verify.yml)
 
 ## Docker support
 
