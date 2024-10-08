@@ -68,6 +68,17 @@ jobs:
 
       - name: Build
         run: pnpm web build
+  web-build-docker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install
+        uses: ./.github/actions/install
+
+      - name: Build
+        run: pnpm web build:docker
 
   # api
   api-test-unit:
@@ -103,3 +114,14 @@ jobs:
 
       - name: Build
         run: pnpm api build
+  api-build-docker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install
+        uses: ./.github/actions/install
+
+      - name: Build
+        run: pnpm api build:docker
