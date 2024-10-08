@@ -1,6 +1,8 @@
-name: PR Check
+name: Verify
 
 on:
+  push:
+    branches: [ master, main ]
   pull_request:
 
 permissions:
