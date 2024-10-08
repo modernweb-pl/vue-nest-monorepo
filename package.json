@@ -1,8 +1,13 @@
 {
   "name": "vue-nest-monorepo",
   "private": true,
-  "repository": "git@github.com:modernweb-pl/vue-nest-monorepo.git",
   "author": "ModernWeb <biuro@modernweb.pl>",
+  "repository": "git@github.com:modernweb-pl/vue-nest-monorepo.git",
+  "homepage": "https://github.com/modernweb-pl/vue-nest-monorepo",
+  "docker": {
+    "registry": "ghcr.io/modernweb-pl/vue-nest-monorepo"
+  },
+  "type": "module",
   "packageManager": "pnpm@9.10.0",
   "engineStrict": true,
   "engines": {
@@ -12,13 +17,12 @@
   "scripts": {
     "dev": "pnpm -r --parallel dev",
     "api": "pnpm -F @app/api",
-    "api:docker": "docker build . -t docker.pkg.github.com/modernweb-pl/vue-nest-monorepo/api -f apps/api/Dockerfile",
-    "api:docker:push": "docker push docker.pkg.github.com/modernweb-pl/vue-nest-monorepo/api",
     "web": "pnpm -F @app/web",
-    "web:docker": "docker build . -t docker.pkg.github.com/modernweb-pl/vue-nest-monorepo/web -f apps/web/Dockerfile",
-    "web:docker:push": "docker push docker.pkg.github.com/modernweb-pl/vue-nest-monorepo/web",
     "build": "pnpm -r --parallel build",
-    "clean": "rimraf --glob dist node_modules apps/*/node_modules",
+    "docker:build": "pnpm -r --stream docker:build",
+    "docker:push": "pnpm -r --stream docker:push",
+    "clean": "rimraf --glob apps/*/dist node_modules apps/*/node_modules",
+    "clean:build": "rimraf --glob apps/*/dist",
     "format": "pnpm lint --fix && prettier --write **/*.{html,scss,json}",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx,.vue,.cjs,.mjs",
     "test": "pnpm -r --parallel test",
@@ -34,10 +38,12 @@
     "eslint": "^8.41.0",
     "eslint-config-prettier": "^7.2.0",
     "eslint-plugin-prettier": "^3.4.1",
+    "execa": "^9.4.0",
     "lint-staged": "~10.0.10",
     "prettier": "~2.0.5",
     "rimraf": "^6.0.1",
     "typescript": "^4.9.5",
+    "yargs": "^17.7.2",
     "yorkie": "~2.0.0"
   },
   "gitHooks": {
