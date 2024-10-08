@@ -51,3 +51,7 @@ docker-compose up
 ```
 
 This will spin up all defined services and link containers as needed.
+
+### GitHub Actions for Automated Docker Builds and Pushes
+
+A GitHub Actions workflow is already configured in this repository to automatically build and push Docker images to GitHub Packages whenever a new tag is pushed.
