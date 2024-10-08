@@ -45,6 +45,16 @@ jobs:
       - name: Install
         uses: ./.github/actions/install
 
+      - name: Cache Cypress Binary
+        id: cache-cypress-binary
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/Cypress
+          key: cypress-${{ hashFiles('pnpm-lock.yaml') }}
+
+      - name: Ensure Cypress Binary
+        run: ./apps/web/node_modules/.bin/cypress install
+
       - name: Test
         run: pnpm web test:e2e
   web-build:
