@@ -1,9 +1,13 @@
 name: Docker Publish
 
 on:
-#  push:
-#    tags: ['*']
+  push:
+    tags: ['*']
   workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
 
 env:
   REGISTRY: ghcr.io
@@ -12,9 +16,6 @@ env:
 jobs:
   web:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
     steps:
       - uses: actions/checkout@v4
       - name: Repository Basename
@@ -38,6 +39,34 @@ jobs:
         with:
           context: .
           target: web
-          push: false
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+  api:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Repository Basename
+        id: repository-basename
+        run: |
+          echo "value=`basename ${{ github.repository }}`" >> $GITHUB_OUTPUT
+        shell: bash
+      - uses: docker/metadata-action@v5
+        id: meta
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/app/api
+          labels: |
+            org.opencontainers.image.title=${{ steps.repository-basename.outputs.value }}/app/api
+      - uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build app/api
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          target: api
+          push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
