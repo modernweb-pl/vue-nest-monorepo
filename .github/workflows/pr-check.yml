@@ -6,6 +6,9 @@ on:
 permissions:
   contents: read
 
+env:
+  AUTH_SECRET: "ci-not-a-secret"
+
 jobs:
   lint:
     runs-on: ubuntu-latest
@@ -18,7 +21,9 @@ jobs:
 
       - name: Lint
         run: pnpm lint
-  unit-test:
+
+  # web
+  web-test-unit:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -28,8 +33,19 @@ jobs:
         uses: ./.github/actions/install
 
       - name: Test
-        run: pnpm test
-  build:
+        run: pnpm web test
+  web-test-e2e:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install
+        uses: ./.github/actions/install
+
+      - name: Test
+        run: pnpm web test:e2e
+  web-build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -39,4 +55,39 @@ jobs:
         uses: ./.github/actions/install
 
       - name: Build
-        run: pnpm build
+        run: pnpm web build
+
+  # api
+  api-test-unit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install
+        uses: ./.github/actions/install
+
+      - name: Test
+        run: pnpm api test
+  api-test-e2e:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install
+        uses: ./.github/actions/install
+
+      - name: Test
+        run: pnpm api test:e2e
+  api-build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install
+        uses: ./.github/actions/install
+
+      - name: Build
+        run: pnpm api build
