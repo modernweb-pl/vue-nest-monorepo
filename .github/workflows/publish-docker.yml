@@ -2,7 +2,8 @@ name: Docker Publish
 
 on:
   push:
-    tags: ['*']
+    branches: [ master, main ]
+    tags: [ '*' ]
   workflow_dispatch:
 
 permissions:
